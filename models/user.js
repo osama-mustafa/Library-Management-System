@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+const bcrypt = require('bcryptjs');
 
 const User = sequelize.define('User', {
     id: {
@@ -18,17 +19,24 @@ const User = sequelize.define('User', {
     },
     password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
     },
 }, {
     timestamps: true,
     tableName: 'users'
 });
 
+// Hash password before save
+User.beforeCreate(async (user, options) => {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(user.password, salt);
+    user.password = hashedPassword;
+})
+
 User.sync()
     .then()
     .catch((error) => {
         console.log(`Cannot create User Table => ${error}`);
-    })
+    });
 
 module.exports = User;
