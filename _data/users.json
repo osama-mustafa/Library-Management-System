@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "role": "admin",
+        "password": "password"
+    },
+    {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Alice Johnson",
+        "email": "alice.j@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Robert Smith",
+        "email": "robert.smith@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Emily Brown",
+        "email": "emily.b@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Daniel Wilson",
+        "email": "daniel.w@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Sophia Davis",
+        "email": "sophia.d@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Michael Miller",
+        "email": "michael.m@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Emma Garcia",
+        "email": "emma.g@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Alexander Taylor",
+        "email": "alexander.t@example.com",
+        "role": "user",
+        "password": "password"
+    },
+    {
+        "name": "Olivia Moore",
+        "email": "olivia.m@example.com",
+        "role": "user",
+        "password": "password"
+    }
+]

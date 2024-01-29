@@ -32,6 +32,11 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    role: {
+        type: DataTypes.STRING,
+        defaultValue: 'user',
+        allowNull: false,
+    },
 }, {
     timestamps: true,
     tableName: 'users'
@@ -42,7 +47,7 @@ User.beforeCreate(async (user, options) => {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(user.password, salt);
     user.password = hashedPassword;
-})
+});
 
 // Create users table using model synchronization
 User.sync()

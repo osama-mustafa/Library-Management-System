@@ -1,13 +1,14 @@
 const User = require('../models/user');
 const handleResourceNotFound = require('../utils/responseHandler');
 const messages = require('../utils/messages');
+const asyncHandler = require('../middlwares/asyncHandler');
 
 
 // @desc    Create user
 // @route   POST /api/v1/users
 // @access  Private/Admin
 
-exports.createUser = async (req, res) => {
+exports.createUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     const user = await User.create({
         name, email, password
@@ -18,14 +19,14 @@ exports.createUser = async (req, res) => {
         message: messages.success.CREATE_RESOURCE,
         data: user
     });
-}
+})
 
 
 // @desc    Get all users
 // @route   GET /api/v1/users
 // @access  Private/Admin
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = asyncHandler(async (req, res) => {
     const users = await User.findAll();
 
     res.status(200).json({
@@ -34,14 +35,14 @@ exports.getAllUsers = async (req, res) => {
         length: users.length,
         data: users
     });
-}
+})
 
 
-// @desc    Get user with id
+// @desc    Get user
 // @route   GET /api/v1/users/:id
 // @access  Private/Admin
 
-exports.getUser = async (req, res) => {
+exports.getUser = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.params.id);
     if (!user) { handleResourceNotFound(req, res) }
     res.status(200).json({
@@ -49,17 +50,20 @@ exports.getUser = async (req, res) => {
         message: messages.success.GET_RESOURCE,
         data: user
     });
-}
+})
 
 
-// @desc    Update user with id
+// @desc    Update user
 // @route   PUT /api/v1/users/:id
 // @access  Private/Admin
 
-exports.updateUser = async (req, res) => {
+exports.updateUser = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.params.id);
     const { name, email } = req.body;
-    if (!user) { handleResourceNotFound(req, res) }
+    if (!user) {
+        handleResourceNotFound(req, res);
+        return;
+    }
     await user.update({
         name, email
     });
@@ -69,19 +73,22 @@ exports.updateUser = async (req, res) => {
         message: messages.success.UPDATE_RESOUCRE,
         data: user
     });
-}
+})
 
 
-// @desc    Delete user with id
+// @desc    Delete user
 // @route   DELETE /api/v1/users/:id
 // @access  Private/Admin
 
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.params.id);
-    if (!user) { handleResourceNotFound(req, res) }
+    if (!user) {
+        handleResourceNotFound(req, res);
+        return;
+    }
     await user.destroy();
     res.status(200).json({
         success: true,
         message: messages.success.DELETE_RESOURCE,
     });
-}
+})
