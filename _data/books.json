@@ -1,0 +1,72 @@
+[
+    {
+        "title": "The Great Gatsby",
+        "author": 1,
+        "ISBN": "978-0-7432-7356-5",
+        "availableCopies": 5,
+        "shelfLocation": "FIC/FITZ/GAT"
+    },
+    {
+        "title": "To Kill a Mockingbird",
+        "author": 2,
+        "ISBN": "978-0-06-112008-4",
+        "availableCopies": 8,
+        "shelfLocation": "FIC/LEE/KIL"
+    },
+    {
+        "title": "1984",
+        "author": 3,
+        "ISBN": "978-0-452-28423-4",
+        "availableCopies": 10,
+        "shelfLocation": "FIC/ORW/NIN"
+    },
+    {
+        "title": "Pride and Prejudice",
+        "author": 4,
+        "ISBN": "978-1-4165-4024-1",
+        "availableCopies": 3,
+        "shelfLocation": "FIC/AUS/PRI"
+    },
+    {
+        "title": "The Catcher in the Rye",
+        "author": 5,
+        "ISBN": "978-0-316-76948-0",
+        "availableCopies": 6,
+        "shelfLocation": "FIC/SAL/CAT"
+    },
+    {
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "author": 6,
+        "ISBN": "978-0-545-01022-8",
+        "availableCopies": 12,
+        "shelfLocation": "FIC/ROW/HAR"
+    },
+    {
+        "title": "The Hobbit",
+        "author": 7,
+        "ISBN": "978-0-395-07122-9",
+        "availableCopies": 4,
+        "shelfLocation": "FIC/TOL/HOB"
+    },
+    {
+        "title": "The Da Vinci Code",
+        "author": 8,
+        "ISBN": "978-0-385-50420-1",
+        "availableCopies": 7,
+        "shelfLocation": "FIC/BRO/DAV"
+    },
+    {
+        "title": "The Hunger Games",
+        "author": 9,
+        "ISBN": "978-0-439-02352-8",
+        "availableCopies": 9,
+        "shelfLocation": "FIC/COL/HUN"
+    },
+    {
+        "title": "The Lord of the Rings",
+        "author": 10,
+        "ISBN": "978-0-618-63442-5",
+        "availableCopies": 11,
+        "shelfLocation": "FIC/TOL/RIN"
+    }
+]

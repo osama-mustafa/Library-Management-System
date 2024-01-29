@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
+const Author = require('./author');
 
 const Book = sequelize.define('Book', {
     id: {
@@ -12,9 +13,12 @@ const Book = sequelize.define('Book', {
         allowNull: false
     },
     author: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true
+        references: {
+            model: Author,
+            key: 'id'
+        }
     },
     ISBN: {
         type: DataTypes.STRING,
@@ -38,6 +42,6 @@ Book.sync()
     .then()
     .catch((error) => {
         console.log(`Cannot create books table: ${error}`)
-    })
+    });
 
 module.exports = Book;
