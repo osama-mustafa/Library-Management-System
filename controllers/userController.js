@@ -31,9 +31,11 @@ exports.getAllUsers = async (req, res) => {
     res.status(201).json({
         success: true,
         message: messages.success.GET_RESOURCES,
+        length: users.length,
         data: users
     });
 }
+
 
 // @desc    Get user with id
 // @route   GET /api/v1/users/:id
@@ -41,7 +43,7 @@ exports.getAllUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     const user = await User.findByPk(req.params.id);
-
+    if (!user) { handleResourceNotFound(req, res) }
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCE,
@@ -66,5 +68,20 @@ exports.updateUser = async (req, res) => {
         success: true,
         message: messages.success.UPDATE_RESOUCRE,
         data: user
+    });
+}
+
+
+// @desc    Delete user with id
+// @route   DELETE /api/v1/users/:id
+// @access  Private/Admin
+
+exports.deleteUser = async (req, res) => {
+    const user = await User.findByPk(req.params.id);
+    if (!user) { handleResourceNotFound(req, res) }
+    await user.destroy();
+    res.status(200).json({
+        success: true,
+        message: messages.success.DELETE_RESOURCE,
     });
 }
