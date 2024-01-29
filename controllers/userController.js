@@ -1,5 +1,7 @@
 const User = require('../models/user');
+const handleResourceNotFound = require('../utils/responseHandler');
 const messages = require('../utils/messages');
+
 
 // @desc    Create user
 // @route   POST /api/v1/users
@@ -43,6 +45,26 @@ exports.getUser = async (req, res) => {
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCE,
+        data: user
+    });
+}
+
+
+// @desc    Update user with id
+// @route   PUT /api/v1/users/:id
+// @access  Private/Admin
+
+exports.updateUser = async (req, res) => {
+    const user = await User.findByPk(req.params.id);
+    const { name, email } = req.body;
+    if (!user) { handleResourceNotFound(req, res) }
+    await user.update({
+        name, email
+    });
+    await user.save();
+    res.status(200).json({
+        success: true,
+        message: messages.success.UPDATE_RESOUCRE,
         data: user
     });
 }

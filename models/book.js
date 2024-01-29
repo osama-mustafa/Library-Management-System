@@ -29,7 +29,15 @@ const Book = sequelize.define('Book', {
         allowNull: false
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    tableName: 'books'
 });
+
+// Create books table using model synchronization
+Book.sync()
+    .then()
+    .catch((error) => {
+        console.log(`Cannot create books table: ${error}`)
+    })
 
 module.exports = Book;

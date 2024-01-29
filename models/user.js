@@ -10,12 +10,23 @@ const User = sequelize.define('User', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            len: {
+                args: [1, 100],
+                msg: 'Name must be between 1 and 100 characters'
+            }
+        }
     },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            isEmail: {
+                msg: 'Please provide a valid email address'
+            }
+        }
     },
     password: {
         type: DataTypes.STRING,
@@ -33,6 +44,7 @@ User.beforeCreate(async (user, options) => {
     user.password = hashedPassword;
 })
 
+// Create users table using model synchronization
 User.sync()
     .then()
     .catch((error) => {

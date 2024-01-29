@@ -11,9 +11,8 @@ const Author = sequelize.define('Author', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    country: {
+    nationality: {
         type: DataTypes.STRING,
-        allowNull: false,
     },
     biography: {
         type: DataTypes.STRING,
@@ -23,10 +22,11 @@ const Author = sequelize.define('Author', {
     tableName: 'authors'
 });
 
-User.sync()
+// Create authors table using model synchronization
+Author.sync()
     .then()
     .catch((error) => {
-        console.log(`Cannot create Author Table => ${error}`);
+        console.log(`Cannot create authors table: ${error}`);
     })
 
 module.exports = Author;
