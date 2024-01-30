@@ -3,7 +3,7 @@ const { sequelize } = require('../config/db');
 const User = require('./user');
 const Book = require('./book');
 
-const UserBook = sequelize.define('UserBook', {
+const Checkout = sequelize.define('Checkout', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -30,7 +30,7 @@ const UserBook = sequelize.define('UserBook', {
     },
     dueDate: {
         type: DataTypes.DATE,
-        defaultValue: () => new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+        defaultValue: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
         allowNull: false,
     },
     returnDate: {
@@ -39,20 +39,16 @@ const UserBook = sequelize.define('UserBook', {
     }
 }, {
     timestamps: false,
-    tableName: 'userBooks'
+    tableName: 'checkouts'
 });
 
-// UserBook.belongsTo(User, { foreignKey: 'userId' });
-// UserBook.belongsTo(Book, { foreignKey: 'bookId' });
+User.belongsToMany(Book, { through: Checkout });
+Book.belongsToMany(User, { through: Checkout });
 
-User.belongsToMany(Book, { through: UserBook });
-Book.belongsToMany(User, { through: UserBook });
-
-// Create users table using model synchronization
-UserBook.sync()
+Checkout.sync()
     .then()
     .catch((error) => {
-        console.log(`Cannot create userBooks Table => ${error}`);
+        console.log(`Cannot create checkouts Table => ${error}`);
     });
 
-module.exports = UserBook;
+module.exports = Checkout;
