@@ -11,6 +11,7 @@ module.exports = {
         CREATE_RESOURCE: 'Create resource successfully',
         UPDATE_RESOUCRE: 'Update resource successfully',
         DELETE_RESOURCE: 'Delete resource successfully',
+        BORROW_BOOK_COMPLETED: 'Borrowing book process has been completed successfully'
     },
     error: {
         RESOURCE_NOT_FOUND: 'Resource not found!',
@@ -24,6 +25,8 @@ module.exports = {
         REVOKED_TOKEN: 'Revoked token! Please login again or create a new account',
         INVALID_IMAGE: 'The file you provided is not a valid image',
         INVALID_FILE_NAME: 'Invalid characters in file name, please rename it, or upload another file',
-        INVALID_FILE_SIZE: 'File size is too large. Max 1MB allowed.'
+        INVALID_FILE_SIZE: 'File size is too large. Max 1MB allowed.',
+        INVALID_BOOK: 'Book is not exist or not available right now',
+        INVALID_USER: 'User is not found'
     }
 }

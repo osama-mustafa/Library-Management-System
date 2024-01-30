@@ -12,12 +12,12 @@ const Book = sequelize.define('Book', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    authorId: {
+    AuthorId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: Author,
-            key: 'id'
+            key: Author.id
         }
     },
     ISBN: {
@@ -36,6 +36,12 @@ const Book = sequelize.define('Book', {
     timestamps: true,
     tableName: 'books'
 });
+
+Author.hasMany(Book);
+
+Book.prototype.isBookAvailable = function () {
+    return this.availableCopies >= 1;
+}
 
 
 // // Create books table using model synchronization

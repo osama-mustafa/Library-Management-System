@@ -1,42 +1,42 @@
 [
     {
-        "userId": 3,
-        "bookId": 5
+        "UserId": 3,
+        "BookId": 5
     },
     {
-        "userId": 7,
-        "bookId": 2
+        "UserId": 7,
+        "BookId": 2
     },
     {
-        "userId": 4,
-        "bookId": 8
+        "UserId": 4,
+        "BookId": 8
     },
     {
-        "userId": 6,
-        "bookId": 3
+        "UserId": 6,
+        "BookId": 3
     },
     {
-        "userId": 9,
-        "bookId": 6
+        "UserId": 9,
+        "BookId": 6
     },
     {
-        "userId": 2,
-        "bookId": 4
+        "UserId": 2,
+        "BookId": 4
     },
     {
-        "userId": 8,
-        "bookId": 7
+        "UserId": 8,
+        "BookId": 7
     },
     {
-        "userId": 5,
-        "bookId": 9
+        "UserId": 5,
+        "BookId": 9
     },
     {
-        "userId": 3,
-        "bookId": 2
+        "UserId": 3,
+        "BookId": 2
     },
     {
-        "userId": 6,
-        "bookId": 5
+        "UserId": 6,
+        "BookId": 5
     }
 ]

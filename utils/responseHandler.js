@@ -1,9 +1,9 @@
 const messages = require("./messages")
 
-const handleResourceNotFound = (req, res) => {
+const handleResourceNotFound = (req, res, message = 'Resource not found!') => {
     res.status(404).json({
         success: false,
-        message: messages.error.RESOURCE_NOT_FOUND
+        message: message
     });
 }
 

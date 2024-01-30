@@ -25,7 +25,7 @@ const Checkout = sequelize.define('Checkout', {
     },
     checkoutDate: {
         type: DataTypes.DATE,
-        defaultValue: Date.now,
+        defaultValue: () => new Date(),
         allowNull: false,
     },
     dueDate: {
