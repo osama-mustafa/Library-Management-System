@@ -12,7 +12,7 @@ const Book = sequelize.define('Book', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    author: {
+    authorId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -37,11 +37,12 @@ const Book = sequelize.define('Book', {
     tableName: 'books'
 });
 
-// Create books table using model synchronization
-Book.sync()
-    .then()
-    .catch((error) => {
-        console.log(`Cannot create books table: ${error}`)
-    });
+
+// // Create books table using model synchronization
+// Book.sync()
+//     .then()
+//     .catch((error) => {
+//         console.log(`Cannot create books table: ${error}`)
+//     });
 
 module.exports = Book;

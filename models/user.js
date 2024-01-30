@@ -21,7 +21,7 @@ const User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+        // unique: true,
         validate: {
             isEmail: {
                 msg: 'Please provide a valid email address'
@@ -49,11 +49,13 @@ User.beforeCreate(async (user, options) => {
     user.password = hashedPassword;
 });
 
-// Create users table using model synchronization
-User.sync()
-    .then()
-    .catch((error) => {
-        console.log(`Cannot create User Table => ${error}`);
-    });
+
+
+// // Create users table using model synchronization
+// User.sync()
+//     .then()
+//     .catch((error) => {
+//         console.log(`Cannot create User Table => ${error}`);
+//     });
 
 module.exports = User;

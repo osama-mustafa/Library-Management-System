@@ -27,11 +27,10 @@ const seedData = async () => {
         const books = await readDataFromFile(bookSeederFile);
 
         await sequelize.sync({ force: true });
-        await User.bulkCreate(users, {
-            individualHooks: true
-        });
         await Author.bulkCreate(authors);
+        await User.bulkCreate(users, { individualHooks: true });
         await Book.bulkCreate(books);
+        // await Checkout.bulkCreate(checkouts);
 
         console.log('Data imported successfully');
     } catch (err) {
@@ -41,7 +40,10 @@ const seedData = async () => {
 
 const deleteData = async () => {
     try {
+        // await sequelize.query('SET FOREIGN_KEY_CHECKS = 0', null);
         await sequelize.drop();
+        // await sequelize.query('SET FOREIGN_KEY_CHECKS = 1', null);
+
         console.log('Data destoryed successfully');
     } catch (error) {
         console.log(error);
