@@ -45,10 +45,10 @@ const Checkout = sequelize.define('Checkout', {
 User.belongsToMany(Book, { through: Checkout });
 Book.belongsToMany(User, { through: Checkout });
 
-Checkout.sync()
-    .then()
-    .catch((error) => {
-        console.log(`Cannot create checkouts Table => ${error}`);
-    });
+// Checkout.sync()
+//     .then()
+//     .catch((error) => {
+//         console.log(`Cannot create checkouts Table => ${error}`);
+//     });
 
 module.exports = Checkout;

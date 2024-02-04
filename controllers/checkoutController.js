@@ -2,7 +2,7 @@ const Checkout = require('../models/checkout');
 const asyncHandler = require('../middlwares/asyncHandler');
 const Book = require('../models/book');
 const messages = require('../utils/messages');
-const handleResourceNotFound = require('../utils/responseHandler');
+const {handleResourceNotFound, handleDuplicateRecordError} = require('../utils/responseHandler');
 const User = require('../models/user');
 const { sequelize } = require('../config/db');
 
@@ -30,12 +30,10 @@ exports.borrowBook = asyncHandler(async (req, res) => {
                 return;
             }
 
-            console.log(book.id, 'book.id');
-
             // Create checkout record
             const checkout = await Checkout.create({
-                userId: user.id,
-                bookId: book.id
+                BookId: book.id,
+                UserId: user.id,
             }, { transaction: t });
 
             // Decrement book quantity by 1
@@ -48,11 +46,14 @@ exports.borrowBook = asyncHandler(async (req, res) => {
             });
         });
     } catch (error) {
-        console.log(error)
-        // res.status(500).json({
-        //     success: false,
-        //     message: messages.error.SERVER_ERROR
-        // })
+        if (error?.parent?.errno === 1062) {
+            handleDuplicateRecordError(req, res, messages.error.BORROWED_BOOK_BY_USER)
+            return;
+        }
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
     }
 
 });
