@@ -47,7 +47,6 @@ exports.getBook = asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id, {
         include: {
             model: User,
-            attributes: ['id', 'name', 'role']
         }
     });
 

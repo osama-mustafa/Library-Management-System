@@ -1,7 +1,8 @@
-const Author = require('../models/author');
-const handleResourceNotFound = require('../utils/responseHandler');
-const messages = require('../utils/messages');
-const asyncHandler = require('../middlwares/asyncHandler');
+const Author = require("../models/author");
+const handleResourceNotFound = require("../utils/responseHandler");
+const messages = require("../utils/messages");
+const asyncHandler = require("../middlwares/asyncHandler");
+const Book = require("../models/book");
 
 
 // @desc    Create author
@@ -11,15 +12,17 @@ const asyncHandler = require('../middlwares/asyncHandler');
 exports.createAuthor = asyncHandler(async (req, res) => {
     const { name, nationality, biography } = req.body;
     const user = await Author.create({
-        name, nationality, biography
+        name,
+        nationality,
+        biography,
     });
 
     res.status(201).json({
         success: true,
         message: messages.success.CREATE_RESOURCE,
-        data: user
+        data: user,
     });
-})
+});
 
 
 // @desc    Get all authors
@@ -33,7 +36,7 @@ exports.getAllAuthors = asyncHandler(async (req, res) => {
         success: true,
         message: messages.success.GET_RESOURCES,
         length: authors.length,
-        data: authors
+        data: authors,
     });
 });
 
@@ -43,7 +46,12 @@ exports.getAllAuthors = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 
 exports.getAuthor = asyncHandler(async (req, res) => {
-    const author = await Author.findByPk(req.params.id);
+    const author = await Author.findByPk(req.params.id, {
+        include: {
+            model: Book,
+            attributes: ['id', 'title']
+        }
+    });
 
     if (!author) {
         handleResourceNotFound(req, res);
@@ -52,7 +60,7 @@ exports.getAuthor = asyncHandler(async (req, res) => {
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCE,
-        data: author
+        data: author,
     });
 });
 
@@ -73,9 +81,9 @@ exports.updateAuthor = asyncHandler(async (req, res) => {
     res.status(200).json({
         success: true,
         message: messages.success.UPDATE_RESOUCRE,
-        data: author
+        data: author,
     });
-})
+});
 
 
 // @desc    Delete author
@@ -93,4 +101,4 @@ exports.deleteAuthor = asyncHandler(async (req, res) => {
         success: true,
         message: messages.success.DELETE_RESOURCE,
     });
-})
+});
