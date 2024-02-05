@@ -3,7 +3,7 @@ const { sequelize } = require('../config/db');
 const User = require('./user');
 const Book = require('./book');
 
-const Checkout = sequelize.define('Checkout', {
+const Borrow = sequelize.define('Borrow', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -39,16 +39,16 @@ const Checkout = sequelize.define('Checkout', {
     }
 }, {
     timestamps: false,
-    tableName: 'checkouts'
+    tableName: 'borrows'
 });
 
-User.belongsToMany(Book, { through: Checkout });
-Book.belongsToMany(User, { through: Checkout });
+User.belongsToMany(Book, { through: Borrow });
+Book.belongsToMany(User, { through: Borrow });
 
-// Checkout.sync()
+// Borrow.sync()
 //     .then()
 //     .catch((error) => {
-//         console.log(`Cannot create checkouts Table => ${error}`);
+//         console.log(`Cannot create borrows Table => ${error}`);
 //     });
 
-module.exports = Checkout;
+module.exports = Borrow;

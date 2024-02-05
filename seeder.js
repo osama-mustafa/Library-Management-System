@@ -2,15 +2,11 @@ const fs = require('node:fs/promises');
 const userSeederFile = `${__dirname}/_data/users.json`;
 const authorSeederFile = `${__dirname}/_data/authors.json`;
 const bookSeederFile = `${__dirname}/_data/books.json`;
-const checkoutSeederFile = `${__dirname}/_data/checkouts.json`;
+const borrowSeederFile = `${__dirname}/_data/borrows.json`;
 const User = require('./models/user');
 const Author = require('./models/author');
 const Book = require('./models/book');
-const Checkout = require('./models/checkout');
-const { QueryTypes } = require('sequelize');
-
-
-
+const Borrow = require('./models/borrow');
 require('dotenv').config();
 const { connectDB, sequelize } = require('./config/db');
 
@@ -30,13 +26,13 @@ const seedData = async () => {
         const users = await readDataFromFile(userSeederFile);
         const authors = await readDataFromFile(authorSeederFile);
         const books = await readDataFromFile(bookSeederFile);
-        const checkouts = await readDataFromFile(checkoutSeederFile);
+        const borrows = await readDataFromFile(borrowSeederFile);
 
         await sequelize.sync({ force: true });
         await User.bulkCreate(users, { individualHooks: true });
         await Author.bulkCreate(authors);
         await Book.bulkCreate(books);
-        await Checkout.bulkCreate(checkouts);
+        await Borrow.bulkCreate(borrows);
 
         console.log('Data imported successfully');
     } catch (err) {

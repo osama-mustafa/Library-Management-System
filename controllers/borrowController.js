@@ -1,18 +1,17 @@
-const Checkout = require("../models/checkout");
 const asyncHandler = require("../middlwares/asyncHandler");
 const Book = require("../models/book");
 const User = require("../models/user");
+const Borrow = require("../models/borrow");
 const messages = require("../utils/messages");
 const {
     handleResourceNotFound,
     handleDuplicateRecordError,
 } = require("../utils/responseHandler");
 const { sequelize } = require("../config/db");
-const { QueryTypes, Op } = require("sequelize");
-const Author = require("../models/author");
+const { Op } = require("sequelize");
 
 // @desc    Borrow book
-// @route   DELETE /api/v1/checkouts/:bookId/:userId
+// @route   DELETE /api/v1/borrow/:bookId/:userId
 // @access  Private/User
 
 exports.borrowBook = asyncHandler(async (req, res) => {
@@ -34,8 +33,8 @@ exports.borrowBook = asyncHandler(async (req, res) => {
                 return;
             }
 
-            // Create checkout record
-            const checkout = await Checkout.create(
+            // Create borrow record
+            const borrow = await Borrow.create(
                 {
                     BookId: book.id,
                     UserId: user.id,
@@ -49,7 +48,7 @@ exports.borrowBook = asyncHandler(async (req, res) => {
             res.status(200).json({
                 success: true,
                 message: messages.success.BORROW_BOOK_COMPLETED,
-                data: checkout,
+                data: borrow,
             });
         });
     } catch (error) {
@@ -69,12 +68,12 @@ exports.borrowBook = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get all borrowers
-// @route   GET /api/v1/checkouts/borrowers
+// @route   GET /api/v1/borrow/borrowers
 // @access  Private/Admin
 
 // FIXME: This function does not return any data!
 exports.getAllBorrowers = asyncHandler(async (req, res) => {
-    const borrowers = await Checkout.findAll({
+    const borrowers = await Borrow.findAll({
         include: [Book, User],
     });
 
@@ -87,8 +86,9 @@ exports.getAllBorrowers = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get all books that exceed due date
-// @route   GET /api/v1/checkouts/overdue-books
+// @route   GET /api/v1/borrow/overdue-books
 // @access  Private/Admin
+
 exports.getOverdueBooks = asyncHandler(async (req, res) => {
     const books = await Book.findAll({
         attributes: ['id', 'title'],
@@ -96,7 +96,7 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
             model: User,
             attributes: ['id', 'name'],
             through: {
-                model: Checkout,
+                model: Borrow,
                 attributes: ["dueDate"],
                 where: {
                     dueDate: {
@@ -106,7 +106,7 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
             },
         },
         where: {
-            '$Users.Checkout.id$': {
+            '$Users.Borrow.id$': {
                 [Op.ne]: null
             }
         },
