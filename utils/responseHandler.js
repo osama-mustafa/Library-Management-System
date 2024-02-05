@@ -16,4 +16,4 @@ const handleDuplicateRecordError = (req, res, message = 'Duplicate record!') => 
 }
 
 
-module.exports = {handleResourceNotFound, handleDuplicateRecordError}
+module.exports = { handleResourceNotFound, handleDuplicateRecordError }
