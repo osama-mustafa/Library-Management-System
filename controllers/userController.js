@@ -2,6 +2,7 @@ const User = require('../models/user');
 const handleResourceNotFound = require('../utils/responseHandler');
 const messages = require('../utils/messages');
 const asyncHandler = require('../middlwares/asyncHandler');
+const Book = require('../models/book');
 
 
 // @desc    Create user
@@ -43,7 +44,9 @@ exports.getAllUsers = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 
 exports.getUser = asyncHandler(async (req, res) => {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+        include: [Book]
+    });
     if (!user) { handleResourceNotFound(req, res) }
     res.status(200).json({
         success: true,
