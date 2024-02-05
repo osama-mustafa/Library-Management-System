@@ -7,6 +7,8 @@ const User = require('./models/user');
 const Author = require('./models/author');
 const Book = require('./models/book');
 const Checkout = require('./models/checkout');
+const { QueryTypes } = require('sequelize');
+
 
 
 require('dotenv').config();
@@ -31,8 +33,8 @@ const seedData = async () => {
         const checkouts = await readDataFromFile(checkoutSeederFile);
 
         await sequelize.sync({ force: true });
-        await Author.bulkCreate(authors);
         await User.bulkCreate(users, { individualHooks: true });
+        await Author.bulkCreate(authors);
         await Book.bulkCreate(books);
         await Checkout.bulkCreate(checkouts);
 

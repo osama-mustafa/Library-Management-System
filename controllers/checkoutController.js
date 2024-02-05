@@ -1,14 +1,16 @@
 const Checkout = require('../models/checkout');
 const asyncHandler = require('../middlwares/asyncHandler');
 const Book = require('../models/book');
-const messages = require('../utils/messages');
-const {handleResourceNotFound, handleDuplicateRecordError} = require('../utils/responseHandler');
 const User = require('../models/user');
+const messages = require('../utils/messages');
+const { handleResourceNotFound, handleDuplicateRecordError } = require('../utils/responseHandler');
 const { sequelize } = require('../config/db');
+const { QueryTypes } = require('sequelize');
+const Author = require('../models/author');
 
 
 // @desc    Borrow book
-// @route   DELETE /api/v1/borrowing/:bookId/:userId
+// @route   DELETE /api/v1/checkouts/:bookId/:userId
 // @access  Private/User
 
 exports.borrowBook = asyncHandler(async (req, res) => {
@@ -57,3 +59,22 @@ exports.borrowBook = asyncHandler(async (req, res) => {
     }
 
 });
+
+// @desc    Get all borrowers
+// @route   GET /api/v1/checkouts/borrowers
+// @access  Private/Admin
+
+// FIXME: This function does not return any data!
+exports.getAllBorrowers = asyncHandler(async (req, res) => {
+    const borrowers = await Checkout.findAll({
+        include: [Book, User]
+    });
+
+    res.status(200).json({
+        success: true,
+        message: messages.success.GET_RESOURCES,
+        count: borrowers.length,
+        data: borrowers
+    });
+
+})

@@ -21,7 +21,7 @@ const User = sequelize.define('User', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true,
+        unique: true,
         validate: {
             isEmail: {
                 msg: 'Please provide a valid email address'
@@ -51,7 +51,7 @@ User.beforeCreate(async (user, options) => {
 
 
 
-// // Create users table using model synchronization
+// Create users table using model synchronization
 // User.sync()
 //     .then()
 //     .catch((error) => {
