@@ -34,7 +34,12 @@ const Book = sequelize.define('Book', {
     }
 }, {
     timestamps: true,
-    tableName: 'books'
+    tableName: 'books',
+    defaultScope: {
+        attributes: {
+            exclude: ['createdAt', 'updatedAt']
+        }
+    }
 });
 
 Author.hasMany(Book);

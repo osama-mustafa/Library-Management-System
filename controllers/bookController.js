@@ -2,6 +2,7 @@ const Book = require('../models/book');
 const handleResourceNotFound = require('../utils/responseHandler');
 const messages = require('../utils/messages');
 const asyncHandler = require('../middlwares/asyncHandler');
+const User = require('../models/user');
 
 
 // @desc    Create book
@@ -32,7 +33,7 @@ exports.getAllBooks = asyncHandler(async (req, res) => {
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCES,
-        length: books.length,
+        count: books.length,
         data: books
     });
 });
@@ -43,7 +44,12 @@ exports.getAllBooks = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 
 exports.getBook = asyncHandler(async (req, res) => {
-    const book = await Book.findByPk(req.params.id);
+    const book = await Book.findByPk(req.params.id, {
+        include: {
+            model: User,
+            attributes: ['id', 'name', 'role']
+        }
+    });
 
     if (!book) {
         handleResourceNotFound(req, res);

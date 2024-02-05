@@ -39,7 +39,12 @@ const User = sequelize.define('User', {
     },
 }, {
     timestamps: true,
-    tableName: 'users'
+    tableName: 'users',
+    defaultScope: {
+        attributes: {
+            exclude: ['createdAt', 'updatedAt', 'password']
+        }
+    }
 });
 
 // Hash password before save

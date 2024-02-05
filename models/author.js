@@ -19,7 +19,12 @@ const Author = sequelize.define('Author', {
     },
 }, {
     timestamps: true,
-    tableName: 'authors'
+    tableName: 'authors',
+    defaultScope: {
+        attributes: {
+            exclude: ['createdAt', 'updatedAt']
+        }
+    }
 });
 
 // // Create authors table using model synchronization
