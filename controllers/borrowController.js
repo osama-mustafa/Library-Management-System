@@ -10,6 +10,7 @@ const {
 const { sequelize } = require("../config/db");
 const { Op } = require("sequelize");
 
+
 // @desc    Borrow book
 // @route   DELETE /api/v1/borrow/:bookId/:userId
 // @access  Private/User
@@ -67,6 +68,7 @@ exports.borrowBook = asyncHandler(async (req, res) => {
     }
 });
 
+
 // @desc    Get all borrowers
 // @route   GET /api/v1/borrow/borrowers
 // @access  Private/Admin
@@ -84,6 +86,7 @@ exports.getAllBorrowers = asyncHandler(async (req, res) => {
         data: borrowers,
     });
 });
+
 
 // @desc    Get all books that exceed due date
 // @route   GET /api/v1/borrow/overdue-books
@@ -119,3 +122,27 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
         data: books,
     });
 });
+
+// @desc    Return book
+// @route   GET /api/v1/borrow/return-books/:borrowId
+// @access  Private/User
+
+exports.returnBook = asyncHandler(async (req, res) => {
+    const borrowProcess = await Borrow.findOne({
+        where: { id: req.params.borrowId }
+    });
+
+    if (!borrowProcess) {
+        handleResourceNotFound(req, res);
+        return;
+    }
+
+    await borrowProcess.update({ returnDate: new Date() });
+    await borrowProcess.save();
+    res.status(200).json({
+        success: true,
+        message: messages.success.RETURN_BOOK,
+    })
+})
+
+

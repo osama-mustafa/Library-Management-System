@@ -11,7 +11,8 @@ module.exports = {
         CREATE_RESOURCE: 'Create resource successfully',
         UPDATE_RESOUCRE: 'Update resource successfully',
         DELETE_RESOURCE: 'Delete resource successfully',
-        BORROW_BOOK_COMPLETED: 'Borrowing book process has been completed successfully'
+        BORROW_BOOK_COMPLETED: 'Borrowing book process has been completed successfully',
+        RETURN_BOOK: 'Book has been returned successfully'
     },
     error: {
         RESOURCE_NOT_FOUND: 'Resource not found!',
@@ -28,6 +29,6 @@ module.exports = {
         INVALID_FILE_SIZE: 'File size is too large. Max 1MB allowed.',
         INVALID_BOOK: 'Book is not exist or not available right now',
         INVALID_USER: 'User is not found',
-        BORROWED_BOOK_BY_USER: 'This book already borrowed by this user'
+        BORROWED_BOOK_BY_USER: 'This book already borrowed by this user',
     }
 }
