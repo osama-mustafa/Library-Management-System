@@ -11,7 +11,7 @@ module.exports = {
         CREATE_RESOURCE: 'Create resource successfully',
         UPDATE_RESOUCRE: 'Update resource successfully',
         DELETE_RESOURCE: 'Delete resource successfully',
-        BORROW_BOOK_COMPLETED: 'Borrowing book process has been completed successfully',
+        BORROW_BOOK_COMPLETED: 'Borrowing process has been completed successfully',
         RETURN_BOOK: 'Book has been returned successfully'
     },
     error: {

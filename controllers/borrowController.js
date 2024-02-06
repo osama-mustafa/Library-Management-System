@@ -132,11 +132,19 @@ exports.returnBook = asyncHandler(async (req, res) => {
         where: { id: req.params.borrowId }
     });
 
+    console.log(borrowProcess, 'borrowProcess')
+
     if (!borrowProcess) {
         handleResourceNotFound(req, res);
         return;
     }
 
+    console.log(borrowProcess.bookId, 'borrowProcess.bookId')
+    const book = await Book.findOne({
+        where: { id: borrowProcess.BookId }
+    })
+
+    await book.increment("availableCopies");
     await borrowProcess.update({ returnDate: new Date() });
     await borrowProcess.save();
     res.status(200).json({
