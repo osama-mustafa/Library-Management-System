@@ -73,11 +73,22 @@ exports.borrowBook = asyncHandler(async (req, res) => {
 // @route   GET /api/v1/borrow/borrowers
 // @access  Private/Admin
 
-// FIXME: This function does not return any data!
 exports.getAllBorrowers = asyncHandler(async (req, res) => {
-    const borrowers = await Borrow.findAll({
-        include: [Book, User],
-    });
+    const borrowers = await User.findAll({
+        attributes: ['id', 'name'],
+        include: {
+            model: Book,
+            attributes: ['id', 'title'],
+            through: {
+                model: Borrow,
+            }
+        },
+        where: {
+            '$Books.Borrow.id$': {
+                [Op.ne]: null
+            }
+        }
+    })
 
     res.status(200).json({
         success: true,
