@@ -62,13 +62,13 @@ exports.getUser = asyncHandler(async (req, res) => {
 
 exports.updateUser = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.params.id);
-    const { name, email } = req.body;
+    const { name, email, role } = req.body;
     if (!user) {
         handleResourceNotFound(req, res);
         return;
     }
     await user.update({
-        name, email
+        name, email, role
     });
     await user.save();
     res.status(200).json({
