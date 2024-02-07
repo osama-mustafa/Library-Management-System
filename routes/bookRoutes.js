@@ -8,13 +8,15 @@ const {
     deleteBook,
     getAvailableBooks
 } = require('../controllers/bookController');
+const guestMiddleware = require('../middlwares/guestMiddleware');
+const authenticationMiddleware = require('../middlwares/authenticationMiddleware');
 
-router.get('/available', getAvailableBooks);
-router.post('/', createBook);
-router.get('/', getAllBooks);
-router.get('/:id', getBook);
-router.put('/:id', updateBook)
-router.delete('/:id', deleteBook)
+router.get('/available', guestMiddleware, getAvailableBooks);
+router.post('/', authenticationMiddleware, createBook);
+router.get('/', guestMiddleware, getAllBooks);
+router.get('/:id', authenticationMiddleware, getBook);
+router.put('/:id', authenticationMiddleware, updateBook)
+router.delete('/:id', authenticationMiddleware, deleteBook)
 
 
 module.exports = router;
