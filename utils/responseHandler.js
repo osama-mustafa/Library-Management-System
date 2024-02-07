@@ -1,12 +1,5 @@
 const messages = require("./messages")
 
-const handleResourceNotFound = (req, res, message = 'Resource not found!') => {
-    res.status(404).json({
-        success: false,
-        message: message
-    });
-}
-
 const handleDuplicateRecordError = (req, res, message = 'Duplicate record!') => {
     res.status(400).json({
         success: false,
@@ -28,9 +21,24 @@ const handleForbidden = (req, res, message = 'Forbidden!') => {
     });
 }
 
+const handleResourceNotFound = (req, res, message = 'Resource not found!') => {
+    res.status(404).json({
+        success: false,
+        message: message
+    });
+}
+
+const handleServerError = (req, res, message = 'Internal server error!') => {
+    res.status(500).json({
+        success: false,
+        message: message
+    });
+}
+
 module.exports = {
     handleResourceNotFound,
     handleDuplicateRecordError,
     handleNotAuthorized,
-    handleForbidden
+    handleForbidden,
+    handleServerError
 }

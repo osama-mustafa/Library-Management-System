@@ -6,6 +6,7 @@ const messages = require("../utils/messages");
 const {
     handleResourceNotFound,
     handleDuplicateRecordError,
+    handleServerError,
 } = require("../utils/responseHandler");
 const { sequelize } = require("../config/db");
 const { Op } = require("sequelize");
@@ -61,10 +62,7 @@ exports.borrowBook = asyncHandler(async (req, res) => {
             );
             return;
         }
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
+        handleServerError(req, res, messages.error.SERVER_ERROR);
     }
 });
 
