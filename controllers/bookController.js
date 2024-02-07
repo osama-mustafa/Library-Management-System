@@ -3,6 +3,7 @@ const { handleResourceNotFound } = require("../utils/responseHandler");
 const messages = require("../utils/messages");
 const asyncHandler = require("../middlwares/asyncHandler");
 const User = require("../models/user");
+const searchHandler = require('../utils/searchHandler');
 const { Op } = require("sequelize");
 
 // @desc    Create book
@@ -126,5 +127,23 @@ exports.getAvailableBooks = asyncHandler(async (req, res) => {
         message: messages.success.GET_RESOURCES,
         count: books.length,
         data: books,
+    });
+});
+
+
+// @desc    Search books
+// @route   GET /api/v1/books/search?searchTerm=mySearchTerm
+// @access  Public
+
+exports.searchBooks = asyncHandler(async (req, res) => {
+    const searchTerm = req.query.searchTerm;
+    console.log(req.query.searchTerm, 'req.query.searchTerm')
+    const result = await searchHandler(Book, ['title', 'ISBN'], searchTerm);
+
+    res.status(200).json({
+        success: true,
+        message: messages.success.GET_RESOURCES,
+        count: result.length,
+        data: result,
     });
 });
