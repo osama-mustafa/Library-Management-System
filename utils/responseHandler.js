@@ -8,12 +8,29 @@ const handleResourceNotFound = (req, res, message = 'Resource not found!') => {
 }
 
 const handleDuplicateRecordError = (req, res, message = 'Duplicate record!') => {
-    console.log(message)
     res.status(400).json({
         success: false,
         message: message
     });
 }
 
+const handleNotAuthorized = (req, res, message = 'Not authorized') => {
+    res.status(401).json({
+        success: false,
+        message: message
+    });
+}
 
-module.exports = { handleResourceNotFound, handleDuplicateRecordError }
+const handleForbidden = (req, res, message = 'Forbidden!') => {
+    res.status(403).json({
+        success: false,
+        message: message
+    });
+}
+
+module.exports = {
+    handleResourceNotFound,
+    handleDuplicateRecordError,
+    handleNotAuthorized,
+    handleForbidden
+}

@@ -9,7 +9,6 @@ const {
     resetPassword,
     updatePassword } = require('../controllers/authenticationController');
 
-
 router.post('/register', register);
 // router.post('/login', login);
 // router.get('/me', getAuthenticatedUser)
