@@ -1,6 +1,8 @@
-const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { DataTypes } = require('sequelize');
+
 
 const User = sequelize.define('User', {
     id: {
@@ -53,6 +55,24 @@ User.beforeCreate(async (user, options) => {
     const hashedPassword = await bcrypt.hash(user.password, salt);
     user.password = hashedPassword;
 });
+
+// Generate JWT token
+User.prototype.generateSignedJwtToken = async function () {
+    try {
+        const user = {
+            id: this._id,
+            name: this.name,
+            role: this.role
+        }
+        const token = await jwt.sign(user, process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRE
+        });
+        return token;
+
+    } catch (err) {
+        throw err
+    }
+}
 
 
 
