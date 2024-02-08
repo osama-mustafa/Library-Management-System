@@ -20,7 +20,6 @@ exports.register = asyncHandler(async (req, res) => {
 exports.login = asyncHandler(async (req, res) => {
     let user = await User.findOne({ where: { email: req.body.email } });
     if (user) {
-        console.log(user, 'user')
         const isPasswordValid = user.isPasswordsMatched(req.body.password);
         if (isPasswordValid) {
             let token = await user.generateSignedJwtToken();
