@@ -60,7 +60,7 @@ User.beforeCreate(async (user, options) => {
 User.prototype.generateSignedJwtToken = async function () {
     try {
         const user = {
-            id: this._id,
+            id: this.id,
             name: this.name,
             role: this.role
         }
