@@ -10,3 +10,13 @@
 - Login with librarian privileges
   - email: librarian@example.com
   - password: librarian
+
+## Project Features
+
+1. Books
+
+- Add a book with details like title, author, ISBN, available quantity, and shelf location.
+- Update a book’s details
+- Delete a book
+- List all books
+- Search for a book by title or ISBN
