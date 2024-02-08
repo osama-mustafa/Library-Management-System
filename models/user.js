@@ -44,7 +44,7 @@ const User = sequelize.define('User', {
     tableName: 'users',
     defaultScope: {
         attributes: {
-            exclude: ['createdAt', 'updatedAt', 'password']
+            exclude: ['createdAt', 'updatedAt']
         }
     }
 });
@@ -74,6 +74,11 @@ User.prototype.generateSignedJwtToken = async function () {
     }
 }
 
+
+// Compare entered password with hashed password
+User.prototype.isPasswordsMatched = function (enteredPassword) {
+    return bcrypt.compareSync(enteredPassword, this.password);
+}
 
 
 // Create users table using model synchronization

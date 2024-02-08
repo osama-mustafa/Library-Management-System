@@ -3,13 +3,13 @@
         "name": "Admin",
         "email": "admin@gmail.com",
         "role": "admin",
-        "password": "password"
+        "password": "admin"
     },
     {
         "name": "Librarian",
         "email": "librarian@example.com",
         "role": "librarian",
-        "password": "password"
+        "password": "librarian"
     },
     {
         "name": "Alice Johnson",

@@ -10,8 +10,8 @@ const {
     updatePassword } = require('../controllers/authenticationController');
 
 router.post('/register', register);
-// router.post('/login', login);
-// router.get('/me', getAuthenticatedUser)
+router.post('/login', login);
+router.get('/me', getAuthenticatedUser)
 // router.post('/logout', logout);
 // router.post('/forgot-password', forgotPassword);
 // router.post('/reset-password/:token', resetPassword);
