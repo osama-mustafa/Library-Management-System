@@ -8,7 +8,7 @@ const { Op } = require("sequelize");
 
 // @desc    Create book
 // @route   POST /api/v1/books
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.createBook = asyncHandler(async (req, res) => {
     const { title, AuthorId, ISBN, availableCopies, shelfLocation } = req.body;
@@ -29,7 +29,7 @@ exports.createBook = asyncHandler(async (req, res) => {
 
 // @desc    Get all books
 // @route   GET /api/v1/books
-// @access  Private/Admin
+// @access  Public
 
 exports.getAllBooks = asyncHandler(async (req, res) => {
     const books = await Book.findAll();
@@ -42,9 +42,9 @@ exports.getAllBooks = asyncHandler(async (req, res) => {
     });
 });
 
-// @desc    Get book
+// @desc    Get book with users who borrowed this book
 // @route   GET /api/v1/books/:id
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.getBook = asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id, {
@@ -67,7 +67,7 @@ exports.getBook = asyncHandler(async (req, res) => {
 
 // @desc    Update book
 // @route   PUT /api/v1/books/:id
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.updateBook = asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
@@ -91,9 +91,10 @@ exports.updateBook = asyncHandler(async (req, res) => {
     });
 });
 
+
 // @desc    Delete book
 // @route   DELETE /api/v1/books/:id
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.deleteBook = asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
@@ -108,9 +109,10 @@ exports.deleteBook = asyncHandler(async (req, res) => {
     });
 });
 
-// @desc    Get available books
+
+// @desc    Get available books which have enough copies
 // @route   GET /api/v1/books/available
-// @access  Private/User
+// @access  Public
 
 exports.getAvailableBooks = asyncHandler(async (req, res) => {
     const books = await Book.findAll({

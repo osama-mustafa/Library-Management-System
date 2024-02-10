@@ -7,7 +7,7 @@ const Book = require("../models/book");
 
 // @desc    Create author
 // @route   POST /api/v1/authors
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.createAuthor = asyncHandler(async (req, res) => {
     const { name, nationality, biography } = req.body;
@@ -27,7 +27,7 @@ exports.createAuthor = asyncHandler(async (req, res) => {
 
 // @desc    Get all authors
 // @route   GET /api/v1/authors
-// @access  Private/Admin
+// @access  Public
 
 exports.getAllAuthors = asyncHandler(async (req, res) => {
     const authors = await Author.findAll();
@@ -43,7 +43,7 @@ exports.getAllAuthors = asyncHandler(async (req, res) => {
 
 // @desc    Get author
 // @route   GET /api/v1/authors/:id
-// @access  Private/Admin
+// @access  Public
 
 exports.getAuthor = asyncHandler(async (req, res) => {
     const author = await Author.findByPk(req.params.id, {
@@ -67,7 +67,7 @@ exports.getAuthor = asyncHandler(async (req, res) => {
 
 // @desc    Update author
 // @route   PUT /api/v1/authors/:id
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.updateAuthor = asyncHandler(async (req, res) => {
     const author = await Author.findByPk(req.params.id);
@@ -88,7 +88,7 @@ exports.updateAuthor = asyncHandler(async (req, res) => {
 
 // @desc    Delete author
 // @route   DELETE /api/v1/authors/:id
-// @access  Private/Admin
+// @access  Private/(Admin || Librarian)
 
 exports.deleteAuthor = asyncHandler(async (req, res) => {
     const author = await Author.findByPk(req.params.id);
