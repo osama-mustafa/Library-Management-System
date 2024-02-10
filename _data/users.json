@@ -14,43 +14,43 @@
     {
         "name": "Alice Johnson",
         "email": "alice.j@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {
         "name": "Robert Smith",
         "email": "robert.smith@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {
         "name": "Emily Brown",
         "email": "emily.b@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {
         "name": "Daniel Wilson",
         "email": "daniel.w@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {
         "name": "Sophia Davis",
         "email": "sophia.d@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {
         "name": "Michael Miller",
         "email": "michael.m@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {
         "name": "Emma Garcia",
         "email": "emma.g@example.com",
-        "role": "member",
+        "role": "user",
         "password": "password"
     },
     {

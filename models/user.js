@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { DataTypes } = require('sequelize');
 const messages = require('../utils/messages');
+const roles = require('../utils/roles');
 
 
 const User = sequelize.define('User', {
@@ -37,8 +38,15 @@ const User = sequelize.define('User', {
     },
     role: {
         type: DataTypes.STRING,
-        defaultValue: 'user',
+        defaultValue: roles.USER,
         allowNull: false,
+        validate: {
+            isIn: {
+                args: [Object.values(roles)],
+                msg: messages.error.INVALID_ROLE
+            }
+
+        }
     },
 }, {
     timestamps: true,
