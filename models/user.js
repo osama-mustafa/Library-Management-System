@@ -18,7 +18,7 @@ const User = sequelize.define('User', {
         validate: {
             len: {
                 args: [1, 100],
-                msg: 'Name must be between 1 and 100 characters'
+                msg: messages.error.INVALID_NAME_LENGTH
             }
         }
     },

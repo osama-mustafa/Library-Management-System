@@ -29,6 +29,7 @@ module.exports = {
         INVALID_FILE_SIZE: 'File size is too large. Max 1MB allowed',
         INVALID_EMAIL: 'Please provide a valid email address!',
         INVALID_ROLE: 'Please provide a valid role for the user',
+        INVALID_NAME_LENGTH: 'Name must be between 1 and 100 characters',
         INVALID_BOOK: 'Book is not exist or not available right now',
         INVALID_USER: 'User is not found',
         BORROWED_BOOK_BY_USER: 'This book already borrowed by this user',
