@@ -55,12 +55,4 @@ Book.prototype.isBookAvailable = function () {
     return this.availableCopies >= 1;
 }
 
-
-// // Create books table using model synchronization
-// Book.sync()
-//     .then()
-//     .catch((error) => {
-//         console.log(`Cannot create books table: ${error}`)
-//     });
-
 module.exports = Book;

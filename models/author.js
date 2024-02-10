@@ -27,11 +27,4 @@ const Author = sequelize.define('Author', {
     }
 });
 
-// // Create authors table using model synchronization
-// Author.sync()
-//     .then()
-//     .catch((error) => {
-//         console.log(`Cannot create authors table: ${error}`);
-//     })
-
 module.exports = Author;

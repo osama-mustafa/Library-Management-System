@@ -89,12 +89,4 @@ User.prototype.isPasswordsMatched = function (enteredPassword) {
     return bcrypt.compareSync(enteredPassword, this.password);
 }
 
-
-// Create users table using model synchronization
-// User.sync()
-//     .then()
-//     .catch((error) => {
-//         console.log(`Cannot create User Table => ${error}`);
-//     });
-
 module.exports = User;

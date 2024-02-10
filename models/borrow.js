@@ -45,10 +45,4 @@ const Borrow = sequelize.define('Borrow', {
 User.belongsToMany(Book, { through: Borrow });
 Book.belongsToMany(User, { through: Borrow });
 
-// Borrow.sync()
-//     .then()
-//     .catch((error) => {
-//         console.log(`Cannot create borrows Table => ${error}`);
-//     });
-
 module.exports = Borrow;
