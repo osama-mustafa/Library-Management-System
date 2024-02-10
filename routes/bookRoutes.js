@@ -20,5 +20,4 @@ router.get('/:id', authenticationMiddleware,librarianMiddleware, getBook);
 router.put('/:id', authenticationMiddleware, librarianMiddleware, updateBook)
 router.delete('/:id', authenticationMiddleware, librarianMiddleware, deleteBook)
 
-
 module.exports = router;
