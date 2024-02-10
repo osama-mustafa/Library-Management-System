@@ -10,7 +10,6 @@ const authenticateUser = (req, res, next) => {
     }
     const token = authHeader.split(' ')[1];
     const privateKey = process.env.JWT_SECRET;
-    console.log(privateKey, 'privatekey')
     jwt.verify(token, privateKey, function (err, decoded) {
         if (err) {
             handleNotAuthorized(req, res, messages.error.INVALID_TOKEN);

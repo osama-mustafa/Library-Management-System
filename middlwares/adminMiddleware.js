@@ -6,7 +6,6 @@ const { handleForbidden } = require('../utils/responseHandler');
 
 const adminMiddleware = async (req, res, next) => {
     const user = await User.findByPk(req.user.id);
-    console.log(req.user, 'req.user')
 
     if (!user || user.role !== roles.ADMIN) {
         handleForbidden(req, res, messages.error.FORBIDDEN);

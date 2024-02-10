@@ -137,7 +137,6 @@ exports.getAvailableBooks = asyncHandler(async (req, res) => {
 
 exports.searchBooks = asyncHandler(async (req, res) => {
     const searchTerm = req.query.searchTerm;
-    console.log(req.query.searchTerm, 'req.query.searchTerm')
     const result = await searchHandler(Book, ['title', 'ISBN'], searchTerm);
 
     res.status(200).json({

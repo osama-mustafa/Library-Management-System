@@ -132,6 +132,7 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
     });
 });
 
+
 // @desc    Return book
 // @route   GET /api/v1/borrow/return-books/:borrowId
 // @access  Private/User
@@ -141,14 +142,11 @@ exports.returnBook = asyncHandler(async (req, res) => {
         where: { id: req.params.borrowId }
     });
 
-    console.log(borrowProcess, 'borrowProcess')
-
     if (!borrowProcess) {
         handleResourceNotFound(req, res);
         return;
     }
 
-    console.log(borrowProcess.bookId, 'borrowProcess.bookId')
     const book = await Book.findOne({
         where: { id: borrowProcess.BookId }
     })
