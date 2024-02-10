@@ -9,16 +9,16 @@ const {
     getAvailableBooks,
     searchBooks
 } = require('../controllers/bookController');
-const guestMiddleware = require('../middlwares/guestMiddleware');
 const authenticationMiddleware = require('../middlwares/authenticationMiddleware');
+const librarianMiddleware = require('../middlwares/librarianMiddleware');
 
-router.get('/available', guestMiddleware, getAvailableBooks);
-router.get('/', guestMiddleware, getAllBooks);
+router.get('/available', getAvailableBooks);
 router.get('/search', searchBooks);
-router.post('/', authenticationMiddleware, createBook);
-router.get('/:id', authenticationMiddleware, getBook);
-router.put('/:id', authenticationMiddleware, updateBook)
-router.delete('/:id', authenticationMiddleware, deleteBook)
+router.get('/', getAllBooks);
+router.post('/', authenticationMiddleware, librarianMiddleware, createBook);
+router.get('/:id', authenticationMiddleware,librarianMiddleware, getBook);
+router.put('/:id', authenticationMiddleware, librarianMiddleware, updateBook)
+router.delete('/:id', authenticationMiddleware, librarianMiddleware, deleteBook)
 
 
 module.exports = router;
