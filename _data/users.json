@@ -12,51 +12,51 @@
         "password": "librarian"
     },
     {
-        "name": "Alice Johnson",
-        "email": "alice.j@example.com",
+        "name": "Omar",
+        "email": "omar@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Robert Smith",
-        "email": "robert.smith@example.com",
+        "name": "Ahmed",
+        "email": "ahmed@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Emily Brown",
-        "email": "emily.b@example.com",
+        "name": "Karim",
+        "email": "karim@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Daniel Wilson",
-        "email": "daniel.w@example.com",
+        "name": "Adam",
+        "email": "adam@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Sophia Davis",
-        "email": "sophia.d@example.com",
+        "name": "Mazen",
+        "email": "mazen@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Michael Miller",
-        "email": "michael.m@example.com",
+        "name": "Watson",
+        "email": "watson@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Emma Garcia",
-        "email": "emma.g@example.com",
+        "name": "Emma",
+        "email": "emma@example.com",
         "role": "user",
         "password": "password"
     },
     {
-        "name": "Alexander Taylor",
-        "email": "alexander.t@example.com",
-        "role": "member",
+        "name": "Taylor",
+        "email": "taylor@example.com",
+        "role": "user",
         "password": "password"
     }
 ]

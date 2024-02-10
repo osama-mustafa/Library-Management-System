@@ -42,6 +42,10 @@ const Borrow = sequelize.define('Borrow', {
     tableName: 'borrows'
 });
 
+Borrow.prototype.isAuthUserBorrowedThisBook = function (userId) {
+    return this.UserId === userId
+}
+
 User.belongsToMany(Book, { through: Borrow });
 Book.belongsToMany(User, { through: Borrow });
 

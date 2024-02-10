@@ -83,10 +83,17 @@ User.prototype.generateSignedJwtToken = async function () {
     }
 }
 
-
 // Compare entered password with hashed password
 User.prototype.isPasswordsMatched = function (enteredPassword) {
     return bcrypt.compareSync(enteredPassword, this.password);
+}
+
+User.prototype.isAdmin = function () {
+    return this.role === roles.ADMIN;
+}
+
+User.prototype.isLibrarian = function () {
+    return this.role === roles.LIBRARIAN;
 }
 
 module.exports = User;

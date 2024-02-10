@@ -7,6 +7,7 @@ const {
     handleResourceNotFound,
     handleDuplicateRecordError,
     handleServerError,
+    handleForbidden,
 } = require("../utils/responseHandler");
 const { sequelize } = require("../config/db");
 const { Op } = require("sequelize");
@@ -135,9 +136,10 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
 
 // @desc    Return book
 // @route   GET /api/v1/borrow/return-books/:borrowId
-// @access  Private/User
-
+// @access  Private / Admin || Librarian || User who borrowed the book 
 exports.returnBook = asyncHandler(async (req, res) => {
+    console.log(req.user, 'req.user');
+    const user = await User.findByPk(req.user.id);
     const borrowProcess = await Borrow.findOne({
         where: { id: req.params.borrowId }
     });
@@ -147,17 +149,26 @@ exports.returnBook = asyncHandler(async (req, res) => {
         return;
     }
 
-    const book = await Book.findOne({
-        where: { id: borrowProcess.BookId }
-    })
+    if (borrowProcess.isAuthUserBorrowedThisBook(req.user.id)
+        || user.isAdmin()
+        || user.isLibrarian()) {
 
-    await book.increment("availableCopies");
-    await borrowProcess.update({ returnDate: new Date() });
-    await borrowProcess.save();
-    res.status(200).json({
-        success: true,
-        message: messages.success.RETURN_BOOK,
-    })
+        const book = await Book.findOne({
+            where: { id: borrowProcess.BookId }
+        })
+
+        await book.increment("availableCopies");
+        await borrowProcess.update({ returnDate: new Date() });
+        await borrowProcess.save();
+        res.status(200).json({
+            success: true,
+            message: messages.success.RETURN_BOOK,
+        })
+    } else {
+        handleForbidden(req, res, messages.error.FORBIDDEN);
+        return;
+    }
+
 })
 
 

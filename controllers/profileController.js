@@ -13,7 +13,7 @@ exports.getBorrowedBooks = asyncHandler(async (req, res) => {
             attributes: ['id', 'title'],
             through: {
                 model: Borrow,
-                attributes: ['checkoutDate', 'dueDate'],
+                attributes: ['id', 'checkoutDate', 'dueDate', 'returnDate'],
             }
         }
     })
