@@ -30,5 +30,6 @@ module.exports = {
         INVALID_BOOK: 'Book is not exist or not available right now',
         INVALID_USER: 'User is not found',
         BORROWED_BOOK_BY_USER: 'This book already borrowed by this user',
+        AVAILABLE_BOOKS_GREATER_THAN_ZERO: 'Available books should be greater than zero!'
     }
 }

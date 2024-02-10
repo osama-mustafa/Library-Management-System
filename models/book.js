@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 const Author = require('./author');
+const messages = require('../utils/messages');
 
 const Book = sequelize.define('Book', {
     id: {
@@ -26,7 +27,13 @@ const Book = sequelize.define('Book', {
     },
     availableCopies: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            min: {
+                args: 0,
+                msg: messages.error.AVAILABLE_BOOKS_GREATER_THAN_ZERO
+            }
+        }
     },
     shelfLocation: {
         type: DataTypes.CHAR,

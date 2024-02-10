@@ -1,5 +1,12 @@
 const messages = require("./messages")
 
+const handleValidationError = (req, res, message = 'Validation error!') => {
+    res.status(400).json({
+        success: false,
+        message: message
+    });
+}
+
 const handleDuplicateRecordError = (req, res, message = 'Duplicate record!') => {
     res.status(400).json({
         success: false,
@@ -36,6 +43,7 @@ const handleServerError = (req, res, message = 'Internal server error!') => {
 }
 
 module.exports = {
+    handleValidationError,
     handleResourceNotFound,
     handleDuplicateRecordError,
     handleNotAuthorized,
