@@ -30,7 +30,7 @@ const Book = sequelize.define('Book', {
         allowNull: false,
         validate: {
             min: {
-                args: 0,
+                args: [1],
                 msg: messages.error.AVAILABLE_BOOKS_GREATER_THAN_ZERO
             }
         }
