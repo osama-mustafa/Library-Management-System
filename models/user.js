@@ -2,6 +2,7 @@ const { sequelize } = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { DataTypes } = require('sequelize');
+const messages = require('../utils/messages');
 
 
 const User = sequelize.define('User', {
@@ -26,7 +27,7 @@ const User = sequelize.define('User', {
         unique: true,
         validate: {
             isEmail: {
-                msg: 'Please provide a valid email address'
+                msg: messages.error.INVALID_EMAIL,
             }
         }
     },
