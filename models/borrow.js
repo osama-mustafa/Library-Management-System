@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 const User = require('./user');
 const Book = require('./book');
+const { Op } = require("sequelize");
 
 const Borrow = sequelize.define('Borrow', {
     id: {
@@ -44,6 +45,25 @@ const Borrow = sequelize.define('Borrow', {
 
 Borrow.prototype.isAuthUserBorrowedThisBook = function (userId) {
     return this.UserId === userId
+}
+
+
+Borrow.isUserExceedBorrowLimit = async function (userId) {
+    const borrowCount = await Borrow.count({
+        where: {
+            UserId: {
+                [Op.eq]: userId
+            },
+            returnDate: {
+                [Op.is]: null
+            }
+        }
+    });
+    console.log(borrowCount, 'borrowCount')
+    console.log(borrowCount >= process.env.BORROW_LIMIT, 'process.env.BORROW_LIMIT')
+
+    return borrowCount >= process.env.BORROW_LIMIT
+
 }
 
 User.belongsToMany(Book, { through: Borrow });

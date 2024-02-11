@@ -36,6 +36,15 @@ exports.borrowBook = asyncHandler(async (req, res) => {
                 return;
             }
 
+            // Check if the user exceed borrow limit for books
+            const isBorrowLimitExceeded = await Borrow.isUserExceedBorrowLimit(user.id);
+            if (isBorrowLimitExceeded) {
+                return res.status(400).json({
+                    success: false,
+                    message: messages.error.EXCEED_BORROW_LIMIT
+                });
+            }
+
             // Create borrow record
             const borrow = await Borrow.create(
                 {
