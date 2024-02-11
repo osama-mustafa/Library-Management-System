@@ -14,3 +14,6 @@ A library management system facilitates the borrowing and returning of books by 
 - Login with librarian privileges
   - email: librarian@example.com
   - password: librarian
+- Login with regular user
+  - email: test@example.com
+  - password: test

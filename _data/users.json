@@ -12,10 +12,10 @@
         "password": "librarian"
     },
     {
-        "name": "Omar",
-        "email": "omar@example.com",
+        "name": "test",
+        "email": "test@example.com",
         "role": "user",
-        "password": "password"
+        "password": "test"
     },
     {
         "name": "Ahmed",
