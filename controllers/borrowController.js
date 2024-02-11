@@ -11,6 +11,7 @@ const {
 } = require("../utils/responseHandler");
 const { sequelize } = require("../config/db");
 const { Op } = require("sequelize");
+const system = require("../config/system");
 
 
 // @desc    Borrow book
@@ -44,6 +45,27 @@ exports.borrowBook = asyncHandler(async (req, res) => {
                     message: messages.error.EXCEED_BORROW_LIMIT
                 });
             }
+
+            // Check is the user borrowed this book and return it before
+            const isUserBorrowedAndReturnedBookBefore = await Borrow.hasUserBorrowedAndReturnedBookBefore(book.id, user.id);
+            if (isUserBorrowedAndReturnedBookBefore) {
+                const oldBorrowProcess = await Borrow.findOne({
+                    where: {
+                        UserId: userId,
+                        BookId: bookId,
+                    }
+                });
+                oldBorrowProcess.update({
+                    returnDate: null,
+                    dueDate: new Date(Date.now() + system.RENEWAL_PERIOD)
+                });
+                oldBorrowProcess.save();
+                return res.status(200).json({
+                    success: true,
+                    message: messages.success.BORROW_BOOK_AGAIN
+                });
+            }
+
 
             // Create borrow record
             const borrow = await Borrow.create(

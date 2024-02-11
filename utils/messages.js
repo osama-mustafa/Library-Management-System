@@ -12,7 +12,8 @@ module.exports = {
         UPDATE_RESOUCRE: 'Update resource successfully',
         DELETE_RESOURCE: 'Delete resource successfully',
         BORROW_BOOK_COMPLETED: 'Borrowing process has been completed successfully',
-        RETURN_BOOK: 'Book has been returned successfully'
+        RETURN_BOOK: 'Book has been returned successfully',
+        BORROW_BOOK_AGAIN: 'You have borrowed the book again successfully'
     },
     error: {
         RESOURCE_NOT_FOUND: 'Resource not found!',

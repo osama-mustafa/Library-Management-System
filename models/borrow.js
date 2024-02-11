@@ -3,7 +3,7 @@ const { sequelize } = require('../config/db');
 const User = require('./user');
 const Book = require('./book');
 const { Op } = require("sequelize");
-
+const system = require('../config/system');
 const Borrow = sequelize.define('Borrow', {
     id: {
         type: DataTypes.INTEGER,
@@ -58,8 +58,20 @@ Borrow.isUserExceedBorrowLimit = async function (userId) {
             }
         }
     });
+    return borrowCount >= system.BORROW_LIMIT
+}
 
-    return borrowCount >= process.env.BORROW_LIMIT
+Borrow.hasUserBorrowedAndReturnedBookBefore = async function (bookId, userId) {
+    const borrowProcess = await Borrow.findOne({
+        where: {
+            UserId: userId,
+            BookId: bookId,
+            returnDate: {
+                [Op.not]: null
+            }
+        }
+    });
+    return borrowProcess;
 }
 
 User.belongsToMany(Book, { through: Borrow });
