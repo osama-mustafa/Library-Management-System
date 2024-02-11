@@ -148,7 +148,6 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
 // @access  Private/(Admin || Librarian || User who borrowed the book) 
 
 exports.returnBook = asyncHandler(async (req, res) => {
-    console.log(req.user, 'req.user');
     const user = await User.findByPk(req.user.id);
     const borrowProcess = await Borrow.findOne({
         where: { id: req.params.borrowId }

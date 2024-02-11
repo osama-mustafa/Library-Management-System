@@ -47,7 +47,6 @@ Borrow.prototype.isAuthUserBorrowedThisBook = function (userId) {
     return this.UserId === userId
 }
 
-
 Borrow.isUserExceedBorrowLimit = async function (userId) {
     const borrowCount = await Borrow.count({
         where: {
@@ -59,11 +58,8 @@ Borrow.isUserExceedBorrowLimit = async function (userId) {
             }
         }
     });
-    console.log(borrowCount, 'borrowCount')
-    console.log(borrowCount >= process.env.BORROW_LIMIT, 'process.env.BORROW_LIMIT')
 
     return borrowCount >= process.env.BORROW_LIMIT
-
 }
 
 User.belongsToMany(Book, { through: Borrow });
