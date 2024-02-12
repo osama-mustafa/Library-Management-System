@@ -11,7 +11,7 @@ const authenticationMiddleware = require('../middlwares/authenticationMiddleware
 const librarianMiddleware = require('../middlwares/librarianMiddleware');
 
 router.post('/', authenticationMiddleware, librarianMiddleware, createAuthor);
-router.get('/', authenticationMiddleware, librarianMiddleware, getAllAuthors);
+router.get('/', getAllAuthors);
 router.get('/:id', getAuthor);
 router.put('/:id', authenticationMiddleware, librarianMiddleware, updateAuthor)
 router.delete('/:id', authenticationMiddleware, librarianMiddleware, deleteAuthor)
