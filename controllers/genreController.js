@@ -1,5 +1,5 @@
 const Genre = require("../models/genre");
-const handleResourceNotFound = require("../utils/responseHandler");
+const { handleResourceNotFound } = require("../utils/responseHandler");
 const messages = require("../utils/messages");
 const asyncHandler = require("../middlwares/asyncHandler");
 
