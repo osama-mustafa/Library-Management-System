@@ -1,4 +1,5 @@
 const Genre = require("../models/genre");
+const Book = require("../models/book");
 const { handleResourceNotFound } = require("../utils/responseHandler");
 const messages = require("../utils/messages");
 const asyncHandler = require("../middlwares/asyncHandler");
@@ -44,7 +45,12 @@ exports.getAllGenres = asyncHandler(async (req, res) => {
 // @access  Public
 
 exports.getGenre = asyncHandler(async (req, res) => {
-    const genre = await Genre.findByPk(req.params.id);
+    const genre = await Genre.findByPk(req.params.id, {
+        include: {
+            model: Book,
+            attributes: ['id', 'title']
+        }
+    });
 
     if (!genre) {
         handleResourceNotFound(req, res);

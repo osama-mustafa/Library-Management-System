@@ -11,13 +11,14 @@ const { Op } = require("sequelize");
 // @access  Private/(Admin || Librarian)
 
 exports.createBook = asyncHandler(async (req, res) => {
-    const { title, AuthorId, ISBN, availableCopies, shelfLocation } = req.body;
+    const { title, AuthorId, ISBN, availableCopies, shelfLocation, GenreId } = req.body;
     const book = await Book.create({
         title,
         AuthorId,
         ISBN,
         availableCopies,
         shelfLocation,
+        GenreId
     });
 
     res.status(201).json({
