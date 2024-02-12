@@ -59,7 +59,9 @@ const Book = sequelize.define('Book', {
 });
 
 Author.hasMany(Book);
-Genre.hasMany(Book)
+Genre.hasMany(Book);
+Book.belongsTo(Author);
+Book.belongsTo(Genre);
 
 Book.prototype.isBookAvailable = function () {
     return this.availableCopies >= 1;

@@ -2,9 +2,10 @@ const Book = require("../models/book");
 const { handleResourceNotFound } = require("../utils/responseHandler");
 const messages = require("../utils/messages");
 const asyncHandler = require("../middlwares/asyncHandler");
-const User = require("../models/user");
+const Author = require("../models/author");
 const searchHandler = require('../utils/searchHandler');
 const { Op } = require("sequelize");
+const Genre = require("../models/genre");
 
 // @desc    Create book
 // @route   POST /api/v1/books
@@ -49,16 +50,23 @@ exports.getAllBooks = asyncHandler(async (req, res) => {
 
 exports.getBook = asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id, {
-        include: {
-            model: User,
-            attributes: ["id", "name"],
-        },
+        include: [
+            {
+                model: Author,
+                attributes: ['id', 'name']
+            },
+            {
+                model: Genre,
+                attributes: ['id', 'name']
+            }
+        ]
     });
 
     if (!book) {
         handleResourceNotFound(req, res);
         return;
     }
+
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCE,
