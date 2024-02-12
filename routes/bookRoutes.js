@@ -16,7 +16,7 @@ router.get('/available', getAvailableBooks);
 router.get('/search', searchBooks);
 router.get('/', getAllBooks);
 router.post('/', authenticationMiddleware, librarianMiddleware, createBook);
-router.get('/:id', authenticationMiddleware,librarianMiddleware, getBook);
+router.get('/:id', getBook);
 router.put('/:id', authenticationMiddleware, librarianMiddleware, updateBook)
 router.delete('/:id', authenticationMiddleware, librarianMiddleware, deleteBook)
 
