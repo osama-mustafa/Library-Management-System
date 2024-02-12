@@ -1,72 +1,82 @@
 [
     {
         "title": "The Great Gatsby",
-        "AuthorId": 1,
         "ISBN": "978-0-7432-7356-5",
         "availableCopies": 5,
-        "shelfLocation": "FIC/FITZ/GAT"
+        "shelfLocation": "FIC/FITZ/GAT",
+        "AuthorId": 1,
+        "GenreId": 1
     },
     {
         "title": "To Kill a Mockingbird",
-        "AuthorId": 2,
         "ISBN": "978-0-06-112008-4",
         "availableCopies": 8,
-        "shelfLocation": "FIC/LEE/KIL"
+        "shelfLocation": "FIC/LEE/KIL",
+        "AuthorId": 2,
+        "GenreId": 2
     },
     {
         "title": "1984",
-        "AuthorId": 3,
         "ISBN": "978-0-452-28423-4",
         "availableCopies": 10,
-        "shelfLocation": "FIC/ORW/NIN"
+        "shelfLocation": "FIC/ORW/NIN",
+        "AuthorId": 3,
+        "GenreId": 3
     },
     {
         "title": "Pride and Prejudice",
-        "AuthorId": 4,
         "ISBN": "978-1-4165-4024-1",
         "availableCopies": 3,
-        "shelfLocation": "FIC/AUS/PRI"
+        "shelfLocation": "FIC/AUS/PRI",
+        "AuthorId": 4,
+        "GenreId": 4
     },
     {
         "title": "The Catcher in the Rye",
-        "AuthorId": 5,
         "ISBN": "978-0-316-76948-0",
         "availableCopies": 6,
-        "shelfLocation": "FIC/SAL/CAT"
+        "shelfLocation": "FIC/SAL/CAT",
+        "AuthorId": 5,
+        "GenreId": 5
     },
     {
         "title": "Harry Potter and the Sorcerer's Stone",
-        "AuthorId": 6,
         "ISBN": "978-0-545-01022-8",
         "availableCopies": 12,
-        "shelfLocation": "FIC/ROW/HAR"
+        "shelfLocation": "FIC/ROW/HAR",
+        "AuthorId": 6,
+        "GenreId": 6
     },
     {
         "title": "The Hobbit",
-        "AuthorId": 7,
         "ISBN": "978-0-395-07122-9",
         "availableCopies": 4,
-        "shelfLocation": "FIC/TOL/HOB"
+        "shelfLocation": "FIC/TOL/HOB",
+        "AuthorId": 7,
+        "GenreId": 7
     },
     {
         "title": "The Da Vinci Code",
-        "AuthorId": 8,
         "ISBN": "978-0-385-50420-1",
         "availableCopies": 7,
-        "shelfLocation": "FIC/BRO/DAV"
+        "shelfLocation": "FIC/BRO/DAV",
+        "AuthorId": 8,
+        "GenreId": 8
     },
     {
         "title": "The Hunger Games",
-        "AuthorId": 9,
         "ISBN": "978-0-439-02352-8",
         "availableCopies": 9,
-        "shelfLocation": "FIC/COL/HUN"
+        "shelfLocation": "FIC/COL/HUN",
+        "AuthorId": 9,
+        "GenreId": 9
     },
     {
         "title": "The Lord of the Rings",
-        "AuthorId": 10,
         "ISBN": "978-0-618-63442-5",
         "availableCopies": 11,
-        "shelfLocation": "FIC/TOL/RIN"
+        "shelfLocation": "FIC/TOL/RIN",
+        "AuthorId": 10,
+        "GenreId": 10
     }
 ]

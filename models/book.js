@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/db');
 const Author = require('./author');
 const messages = require('../utils/messages');
+const Genre = require('./genre');
 
 const Book = sequelize.define('Book', {
     id: {
@@ -12,14 +13,6 @@ const Book = sequelize.define('Book', {
     title: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    AuthorId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Author,
-            key: Author.id
-        }
     },
     ISBN: {
         type: DataTypes.STRING,
@@ -38,7 +31,23 @@ const Book = sequelize.define('Book', {
     shelfLocation: {
         type: DataTypes.CHAR,
         allowNull: false
-    }
+    },
+    AuthorId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Author,
+            key: Author.id
+        }
+    },
+    GenreId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Genre,
+            key: Genre.id
+        }
+    },
 }, {
     timestamps: true,
     tableName: 'books',
@@ -50,6 +59,7 @@ const Book = sequelize.define('Book', {
 });
 
 Author.hasMany(Book);
+Genre.hasMany(Book)
 
 Book.prototype.isBookAvailable = function () {
     return this.availableCopies >= 1;

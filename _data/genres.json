@@ -1,0 +1,43 @@
+[
+    {
+      "name": "Mystery",
+      "description": "Mystery genre involves the solving of a crime or puzzle, typically by a detective figure. It often features suspense, twists, and unexpected revelations."
+    },
+    {
+      "name": "Romance",
+      "description": "Romance genre focuses on love and romantic relationships as central themes. It typically includes emotional depth, passion, and the journey of characters finding love."
+    },
+    {
+      "name": "Science Fiction",
+      "description": "Science fiction genre explores futuristic or speculative concepts, often involving advanced technology, space exploration, and alternative realities."
+    },
+    {
+      "name": "Fantasy",
+      "description": "Fantasy genre features imaginative worlds, magical elements, mythical creatures, and epic adventures. It often explores themes of heroism, destiny, and good versus evil."
+    },
+    {
+      "name": "Historical Fiction",
+      "description": "Historical fiction genre is set in the past and incorporates real historical events, settings, and figures into fictional narratives. It offers insights into different time periods and cultures."
+    },
+    {
+      "name": "Thriller",
+      "description": "Thriller genre focuses on suspense, tension, and excitement. It often involves high stakes, danger, and fast-paced action, keeping readers on the edge of their seats."
+    },
+    {
+      "name": "Horror",
+      "description": "Horror genre aims to evoke fear, terror, and unease in readers. It often includes supernatural elements, monsters, and psychological horror, exploring the darker aspects of human nature."
+    },
+    {
+      "name": "Biography",
+      "description": "Biography genre tells the life story of a real person, written by another person. It offers insights into the experiences, achievements, and challenges faced by notable individuals."
+    },
+    {
+      "name": "Self-help",
+      "description": "Self-help genre provides guidance, advice, and strategies for personal growth, improvement, and self-awareness. It covers various topics such as success, relationships, and mental well-being."
+    },
+    {
+      "name": "Travel",
+      "description": "Travel genre focuses on exploration, adventure, and discovery of different places and cultures. It often includes personal narratives, travelogues, and insights into unique destinations."
+    }
+]
+  
