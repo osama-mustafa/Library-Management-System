@@ -26,7 +26,7 @@ A library management system facilitates the borrowing and returning of books by 
   - Edit book
   - Delete book
   - List all books
-  - List avaiable books
+  - List available books that have available copies
   - Search books with title or ISBN
   - Show book with associated genre & author
 
@@ -35,7 +35,7 @@ A library management system facilitates the borrowing and returning of books by 
   - Create genre
   - Edit genre
   - Delete genre
-  - List all genre
+  - List all genres
   - Show genre with associated books
 
 - Authors
@@ -44,19 +44,20 @@ A library management system facilitates the borrowing and returning of books by 
   - Edit author
   - Delete author
   - List all authors
-  - Search books with title or ISBN
   - Show author with associated books
 
-Borrowing 
+- Borrowing
+
   - Borrow book
   - return book
   - Get overdue book
   - Get all borrowers
+  - Renew borrow process if borrowed before
 
 - Users
+
   - Create user
   - Edit user
   - Delete user
   - List all users
-  - Show user with associated books
-
+  - Show user with associated borrowed books
