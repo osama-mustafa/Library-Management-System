@@ -70,7 +70,7 @@ Borrow.isUserExceedBorrowLimit = async function (userId) {
     return borrowCount >= system.BORROW_LIMIT
 }
 
-Borrow.hasUserBorrowedAndReturnedBookBefore = async function (bookId, userId) {
+Borrow.isUserBorrowedAndReturnedBookBefore = async function (bookId, userId) {
     const borrowProcess = await Borrow.findOne({
         where: {
             UserId: userId,

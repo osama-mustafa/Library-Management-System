@@ -46,20 +46,24 @@ exports.borrowBook = asyncHandler(async (req, res) => {
                 });
             }
 
-            // Check is the user borrowed this book and return it before
-            const isUserBorrowedAndReturnedBookBefore = await Borrow.hasUserBorrowedAndReturnedBookBefore(book.id, user.id);
+            // Check if the user borrowed book and return it before
+            const isUserBorrowedAndReturnedBookBefore = await Borrow.isUserBorrowedAndReturnedBookBefore(book.id, user.id);
             if (isUserBorrowedAndReturnedBookBefore) {
                 const oldBorrowProcess = await Borrow.findOne({
                     where: {
                         UserId: userId,
                         BookId: bookId,
                     }
-                });
-                oldBorrowProcess.update({
+                }, { transaction: t });
+
+                await oldBorrowProcess.update({
                     returnDate: null,
-                    dueDate: new Date(Date.now() + system.RENEWAL_PERIOD)
-                });
-                oldBorrowProcess.save();
+                    dueDate: new Date(Date.now() + system.RENEWAL_PERIOD),
+                    renewed: true
+                }, { transaction: t });
+                await oldBorrowProcess.increment('renewCount', { transaction: t });
+                await oldBorrowProcess.save();
+
                 return res.status(200).json({
                     success: true,
                     message: messages.success.BORROW_BOOK_AGAIN
