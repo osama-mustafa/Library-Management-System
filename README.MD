@@ -4,9 +4,9 @@ A library management system facilitates the borrowing and returning of books by 
 
 ## How to run the project
 - Create your .env file from .env.example with your MySQL database credentials
-- Run the command "npm install" to install project dependencies
-- Run the command "node seeder -i" to seed dummy data
-- Run the command "npm run dev" for starting the server
+- Run the command `npm install` to install project dependencies
+- Run the command `npm run dev` for starting the server
+- In new terminal, run the command `node seeder -i` to seed dummy data
 - Login with admin privileges
   - email: admin@example.com
   - password: admin
