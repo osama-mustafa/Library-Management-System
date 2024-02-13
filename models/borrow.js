@@ -37,7 +37,16 @@ const Borrow = sequelize.define('Borrow', {
     returnDate: {
         type: DataTypes.DATE,
         defaultValue: null
+    },
+    renewCount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+    renewed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
+
 }, {
     timestamps: false,
     tableName: 'borrows'

@@ -1,4 +1,4 @@
-## About 
+## About
 
 A library management system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the library's catalog, adding new books, and overseeing borrowing activities.
 
@@ -17,3 +17,46 @@ A library management system facilitates the borrowing and returning of books by 
 - Login with regular user
   - email: test@example.com
   - password: test
+
+## Key Features
+
+- Books
+
+  - Create book
+  - Edit book
+  - Delete book
+  - List all books
+  - List avaiable books
+  - Search books with title or ISBN
+  - Show book with associated genre & author
+
+- Genres
+
+  - Create genre
+  - Edit genre
+  - Delete genre
+  - List all genre
+  - Show genre with associated books
+
+- Authors
+
+  - Create author
+  - Edit author
+  - Delete author
+  - List all authors
+  - Search books with title or ISBN
+  - Show author with associated books
+
+Borrowing 
+  - Borrow book
+  - return book
+  - Get overdue book
+  - Get all borrowers
+
+- Users
+  - Create user
+  - Edit user
+  - Delete user
+  - List all users
+  - Show user with associated books
+
