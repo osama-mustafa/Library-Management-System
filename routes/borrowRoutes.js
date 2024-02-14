@@ -4,15 +4,20 @@ const {
     borrowBook,
     getAllBorrowers,
     getOverdueBooks,
-    returnBook
+    returnBook,
+    updateBorrowProcess
 } = require('../controllers/borrowController');
 const authenticationMiddleware = require('../middlwares/authenticationMiddleware');
 const adminMiddleware = require('../middlwares/adminMiddleware');
+const librarianMiddleware = require('../middlwares/librarianMiddleware');
+
 
 
 router.post('/return-book/:borrowId', authenticationMiddleware, returnBook)
 router.post('/:bookId/:userId', authenticationMiddleware, borrowBook);
-router.get('/borrowers', authenticationMiddleware, adminMiddleware, getAllBorrowers);
 router.get('/overdue-books', authenticationMiddleware, adminMiddleware, getOverdueBooks)
+router.get('/', authenticationMiddleware, librarianMiddleware, getAllBorrowers);
+router.put('/:id', authenticationMiddleware, librarianMiddleware, updateBorrowProcess);
+
 
 module.exports = router

@@ -204,6 +204,45 @@ exports.returnBook = asyncHandler(async (req, res) => {
         return;
     }
 
-})
+});
+
+// @desc    Update borrowing process
+// @route   GET /api/v1/borrow/:borrowId
+// @access  Private/(Admin || Librarian) 
+
+exports.updateBorrowProcess = asyncHandler(async (req, res) => {
+    const borrowProcess = await Borrow.findByPk(req.params.id);
+    const {
+        UserId,
+        BookId,
+        checkoutDate,
+        dueDate,
+        returnDate,
+        renewCount,
+        renewed
+    } = req.body;
+
+    if (!borrowProcess) {
+        handleResourceNotFound(req, res, messages.error.RESOURCE_NOT_FOUND);
+        return;
+    }
+
+    await borrowProcess.update({
+        UserId,
+        BookId,
+        checkoutDate,
+        dueDate,
+        returnDate,
+        renewCount,
+        renewed
+    });
+
+    await borrowProcess.save();
+    res.status(200).json({
+        success: true,
+        message: messages.success.UPDATE_RESOUCRE
+    });
+
+});
 
 
