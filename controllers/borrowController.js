@@ -246,3 +246,23 @@ exports.updateBorrowProcess = asyncHandler(async (req, res) => {
 });
 
 
+// @desc    Delete borrowing process
+// @route   GET /api/v1/borrow/:borrowId
+// @access  Private/(Admin || Librarian) 
+
+exports.deleteBorrowProcess = asyncHandler(async (req, res) => {
+    const borrowProcess = await Borrow.findByPk(req.params.id);
+
+    if (!borrowProcess) {
+        handleResourceNotFound(req, res, messages.error.RESOURCE_NOT_FOUND);
+        return;
+    }
+
+    await borrowProcess.destroy();
+    res.status(200).json({
+        success: true,
+        message: messages.success.DELETE_RESOURCE
+    });
+});
+
+
