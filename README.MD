@@ -63,10 +63,12 @@ A library management system facilitates the borrowing and returning of books by 
 - Borrowing
 
   - Borrow book
-  - return book
+  - Return book
   - Get overdue book
   - Get all borrowers
   - Renew borrow process if borrowed before
+  - Update borrow process
+  - Delete borrow process
 
 - Users
 
