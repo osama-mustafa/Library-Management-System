@@ -3,16 +3,15 @@ const app = express();
 const port = process.env.PORT || 3000;
 require('dotenv').config();
 const { connectDB } = require('./config/db');
-const mountRoutes = require('./routes/index')
+const mountRoutes = require('./routes/index');
+const rateLimitMiddleware = require('./middlwares/rateLimitMiddleware');
 
 
 // Connect to MySQL DB
 connectDB();
 
-// Parsing application/json
 app.use(express.json());
-
-// Load Routes
+app.use(rateLimitMiddleware);
 mountRoutes(app);
 
 app.listen(port, () => {
