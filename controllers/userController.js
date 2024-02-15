@@ -3,6 +3,7 @@ const handleResourceNotFound = require('../utils/responseHandler');
 const messages = require('../utils/messages');
 const asyncHandler = require('../middlwares/asyncHandler');
 const Book = require('../models/book');
+const FilterAPI = require('../utils/filterAPI')
 
 
 // @desc    Create user
@@ -28,15 +29,29 @@ exports.createUser = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
-    const users = await User.findAll();
+    const filterAPI = new FilterAPI(User, req.query);
+    const result = await filterAPI.select().sort();
+
 
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCES,
-        length: users.length,
-        data: users
+        data: result
     });
 })
+
+// exports.getAllUsers = asyncHandler(async (req, res) => {
+//     const users = await User.findAll();
+
+
+//     res.status(200).json({
+//         success: true,
+//         message: messages.success.GET_RESOURCES,
+//         length: users.length,
+//         data: users
+//     });
+// })
+
 
 
 // @desc    Get user

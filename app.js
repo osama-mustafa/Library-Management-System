@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000;
 require('dotenv').config();
+const port = process.env.PORT || 3000;
+const environment = process.env.NODE_ENV
 const { connectDB } = require('./config/db');
 const mountRoutes = require('./routes/index');
 const rateLimitMiddleware = require('./middlwares/rateLimitMiddleware');
@@ -15,5 +16,5 @@ app.use(rateLimitMiddleware);
 mountRoutes(app);
 
 app.listen(port, () => {
-    console.log(`Library Management System listening on port ${port}`)
+    console.log(`Library Management System listening on ${port} port in ${environment} environment`)
 })

@@ -104,7 +104,7 @@ exports.borrowBook = asyncHandler(async (req, res) => {
 
 
 // @desc    Get all borrowers
-// @route   GET /api/v1/borrow/borrowers
+// @route   GET /api/v1/borrow
 // @access  Private/Admin
 
 exports.getAllBorrowers = asyncHandler(async (req, res) => {
@@ -171,7 +171,7 @@ exports.getOverdueBooks = asyncHandler(async (req, res) => {
 
 // @desc    Return book
 // @route   GET /api/v1/borrow/return-books/:borrowId
-// @access  Private/(Admin || Librarian || User who borrowed the book) 
+// @access  Private/Admin  
 
 exports.returnBook = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.user.id);
@@ -208,7 +208,7 @@ exports.returnBook = asyncHandler(async (req, res) => {
 
 // @desc    Update borrowing process
 // @route   GET /api/v1/borrow/:borrowId
-// @access  Private/(Admin || Librarian) 
+// @access  Private/Admin
 
 exports.updateBorrowProcess = asyncHandler(async (req, res) => {
     const borrowProcess = await Borrow.findByPk(req.params.id);
@@ -248,7 +248,7 @@ exports.updateBorrowProcess = asyncHandler(async (req, res) => {
 
 // @desc    Delete borrowing process
 // @route   GET /api/v1/borrow/:borrowId
-// @access  Private/(Admin || Librarian) 
+// @access  Private/Admin
 
 exports.deleteBorrowProcess = asyncHandler(async (req, res) => {
     const borrowProcess = await Borrow.findByPk(req.params.id);
