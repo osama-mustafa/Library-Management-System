@@ -1,4 +1,8 @@
 
+const isPositiveNumber = require('./helper');
+const system = require('../config/system');
+
+
 class FilterAPI {
     constructor(model, queryString) {
         this.model = model;
@@ -55,11 +59,26 @@ class FilterAPI {
             }
             orderBy = this.queryString.orderBy;
             this.options.order = [[orderBy, orderDirection]];
-            return this.model.findAll(this.options);
-        } else {
-            delete this.options.order;
-            return this.model.findAll(this.options)
         }
+        return this;
+    }
+
+    paginate() {
+        let page = 1;
+        let pageSize = system.DOCUMENTS_PER_PAGE;
+        let offset;
+        let limit;
+        if (isPositiveNumber(Number(this.queryString.page))) {
+            page = parseInt(this.queryString.page)
+            if (isPositiveNumber(Number(this.queryString.pageSize))) {
+                pageSize = parseInt(this.queryString.pageSize);
+            }
+            offset = (page - 1) * pageSize;
+            limit = pageSize;
+            this.options.limit = limit;
+            this.options.offset = offset;
+        }
+        return this.model.findAll(this.options)
     }
 }
 

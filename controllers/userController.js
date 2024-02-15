@@ -30,7 +30,7 @@ exports.createUser = asyncHandler(async (req, res) => {
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
     const filterAPI = new FilterAPI(User, req.query);
-    const result = await filterAPI.select().sort();
+    const result = await filterAPI.select().sort().paginate();
 
 
     res.status(200).json({
