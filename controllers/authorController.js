@@ -3,6 +3,7 @@ const handleResourceNotFound = require("../utils/responseHandler");
 const messages = require("../utils/messages");
 const asyncHandler = require("../middlwares/asyncHandler");
 const Book = require("../models/book");
+const FilterAPI = require("../utils/filterAPI");
 
 
 // @desc    Create author
@@ -30,12 +31,14 @@ exports.createAuthor = asyncHandler(async (req, res) => {
 // @access  Public
 
 exports.getAllAuthors = asyncHandler(async (req, res) => {
-    const authors = await Author.findAll();
+    
+    const filterAPI = new FilterAPI(Author, req.query);
+    const authors = await filterAPI.select().sort().paginate()
 
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCES,
-        length: authors.length,
+        count: authors.length,
         data: authors,
     });
 });

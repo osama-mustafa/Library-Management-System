@@ -30,13 +30,14 @@ exports.createUser = asyncHandler(async (req, res) => {
 
 exports.getAllUsers = asyncHandler(async (req, res) => {
     const filterAPI = new FilterAPI(User, req.query);
-    const result = await filterAPI.select().sort().paginate();
+    const users = await filterAPI.select().sort().paginate();
 
 
     res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCES,
-        data: result
+        count: users.length,
+        data: users
     });
 })
 

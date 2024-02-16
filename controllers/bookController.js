@@ -6,6 +6,7 @@ const Author = require("../models/author");
 const searchHandler = require('../utils/searchHandler');
 const { Op } = require("sequelize");
 const Genre = require("../models/genre");
+const FilterAPI = require("../utils/filterAPI");
 
 // @desc    Create book
 // @route   POST /api/v1/books
@@ -34,7 +35,8 @@ exports.createBook = asyncHandler(async (req, res) => {
 // @access  Public
 
 exports.getAllBooks = asyncHandler(async (req, res) => {
-    const books = await Book.findAll();
+    const filterAPI = new FilterAPI(Book, req.query);
+    const books = await filterAPI.select().sort().paginate();
 
     res.status(200).json({
         success: true,

@@ -3,6 +3,7 @@ const Book = require("../models/book");
 const { handleResourceNotFound } = require("../utils/responseHandler");
 const messages = require("../utils/messages");
 const asyncHandler = require("../middlwares/asyncHandler");
+const FilterAPI = require("../utils/filterAPI");
 
 
 // @desc    Create genre
@@ -29,7 +30,8 @@ exports.createGenre = asyncHandler(async (req, res) => {
 // @access  Public
 
 exports.getAllGenres = asyncHandler(async (req, res) => {
-    const genres = await Genre.findAll();
+    const filterAPI = new FilterAPI(Genre, req.query);
+    const genres = await filterAPI.select().sort().paginate();
 
     res.status(200).json({
         success: true,
