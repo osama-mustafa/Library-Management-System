@@ -2,7 +2,7 @@
 
 A library management API back-end system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the books, authors, and overseeing borrowing activities.
 
-# Project Features
+## API System Features
 - API Documentation
 - API Rate Limiting
 - RESTful Routing
@@ -21,10 +21,10 @@ A library management API back-end system facilitates the borrowing and returning
 - Authors: create, edit, delete, get all authors
 - Borrowing: borrow, return, renew borrowing, manage overdue books
 
-## How to run the project
+## How to Run the Project?
 - Clone the project
 - Create your .env file from .env.example with your MySQL database credentials
-- First need MySQL to be installed in your machine via e.g. [XAMPP](https://www.apachefriends.org/download.html)
+- First you need MySQL to be installed in your machine via e.g. [XAMPP](https://www.apachefriends.org/download.html)
 - Run the command `npm install` to install project dependencies
 - Run the command `npm run dev` for starting the server
 - In new terminal, run the command `node seeder -i` to seed dummy data
