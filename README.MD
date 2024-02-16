@@ -1,9 +1,8 @@
 ## About
 
-A library management system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the library's catalog, adding new books, and overseeing borrowing activities.
+A library management API back-end system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the books, authors, and overseeing borrowing activities.
 
 # Project Features
-
 - API Documentation
 - API Rate Limiting
 - RESTful Routing
@@ -15,9 +14,17 @@ A library management system facilitates the borrowing and returning of books by 
 - Pagination, Sorting & Filtering for Data
 - Roles (Admin, Librarian, and User)
 
-## How to run the project
 
+## Business Features
+- Books: create, edit, delete, get available books, and show with related author & genre
+- Genres: create, edit, delete, get all genres
+- Authors: create, edit, delete, get all authors
+- Borrowing: borrow, return, renew borrowing, manage overdue books
+
+## How to run the project
+- Clone the project
 - Create your .env file from .env.example with your MySQL database credentials
+- First need MySQL to be installed in your machine via e.g. [XAMPP](https://www.apachefriends.org/download.html)
 - Run the command `npm install` to install project dependencies
 - Run the command `npm run dev` for starting the server
 - In new terminal, run the command `node seeder -i` to seed dummy data
@@ -31,48 +38,3 @@ A library management system facilitates the borrowing and returning of books by 
   - email: test@example.com
   - password: test
 
-## Business Features
-
-- Books
-
-  - Create book
-  - Edit book
-  - Delete book
-  - List all books
-  - List available books that have available copies
-  - Search books with title or ISBN
-  - Show book with associated genre & author
-
-- Genres
-
-  - Create genre
-  - Edit genre
-  - Delete genre
-  - List all genres
-  - Show genre with associated books
-
-- Authors
-
-  - Create author
-  - Edit author
-  - Delete author
-  - List all authors
-  - Show author with associated books
-
-- Borrowing
-
-  - Borrow book
-  - Return book
-  - Get overdue book
-  - Get all borrowers
-  - Renew borrow process if borrowed before
-  - Update borrow process
-  - Delete borrow process
-
-- Users
-
-  - Create user
-  - Edit user
-  - Delete user
-  - List all users
-  - Show user with associated borrowed books
