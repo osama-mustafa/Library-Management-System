@@ -1,0 +1,56 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - app-tier
+    ports:
+      - "3000:3000"
+    # environment:
+    #   - NODE_ENV=development
+    #   - PORT=3000
+    #   - DB_USER=root
+    #   - DB_PASS=
+    #   - DB_NAME=library_system
+    #   - DB_HOST=localhost
+    #   - JWT_SECRET=hello_world
+    #   - JWT_EXPIRE=3d
+    #   - DOCUMENTS_PER_PAGE=5
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: 'library_system'
+    networks:
+      - app-tier
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    depends_on:
+      - adminer
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - app-tier
+
+volumes:
+  db-data:
+networks:
+  app-tier:
+
