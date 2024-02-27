@@ -9,36 +9,37 @@ services:
       - app-tier
     ports:
       - "3000:3000"
-    # environment:
-    #   - NODE_ENV=development
-    #   - PORT=3000
-    #   - DB_USER=root
-    #   - DB_PASS=
-    #   - DB_NAME=library_system
-    #   - DB_HOST=localhost
-    #   - JWT_SECRET=hello_world
-    #   - JWT_EXPIRE=3d
-    #   - DOCUMENTS_PER_PAGE=5
+    env_file:
+      - ./.env
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+      - DB_NAME=${DB_NAME}
     depends_on:
-      - mysql
-
+      mysql:
+        condition: service_healthy
   mysql:
     image: mysql:latest
     container_name: mysql
     # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
     # (this is just an example, not intended to be a production configuration)
     restart: always
+    env_file:
+      - ./.env
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_DATABASE: 'library_system'
+      MYSQL_DATABASE: ${DB_NAME}
     networks:
       - app-tier
     ports:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
-    depends_on:
-      - adminer
+    healthcheck:  # Define health check for MySQL service
+      test: ["CMD", "mysqladmin", "ping", "-h", "mysql", "-u${DB_USER}", "-p${DB_PASS}"]
+      interval: 10s  # Check every 10 seconds
+      timeout: 5s   # Timeout after 5 seconds
+      retries: 5    # Retry 5 times before considering the service unhealthy
 
   adminer:
     image: adminer
@@ -48,9 +49,9 @@ services:
       - "8080:8080"
     networks:
       - app-tier
-
+    depends_on:
+      - mysql
 volumes:
   db-data:
 networks:
   app-tier:
-

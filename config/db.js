@@ -5,21 +5,21 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-// const sequelize = new Sequelize(
-//     process.env.DB_NAME,
-//     process.env.DB_USER,
-//     process.env.DB_PASS, {
-//     host: 'mysql',
-//     dialect: 'mysql',
-// });
-
 const sequelize = new Sequelize(
-    'library_system',
-    'root',
-    '', {
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASS, {
     host: 'mysql',
     dialect: 'mysql',
 });
+
+// const sequelize = new Sequelize(
+//     'library_system',
+//     'root',
+//     '', {
+//     host: 'mysql',
+//     dialect: 'mysql',
+// });
 
 const connectDB = async () => {
     try {
@@ -35,6 +35,3 @@ const connectDB = async () => {
 }
 
 module.exports = { sequelize, connectDB }
-
-
-
