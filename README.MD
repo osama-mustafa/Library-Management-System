@@ -2,7 +2,7 @@
 
 A library management API back-end system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the books, authors, and overseeing borrowing activities.
 
-## API System Features
+## Tech Features
 - API Documentation
 - API Rate Limiting
 - RESTful Routing
@@ -13,7 +13,7 @@ A library management API back-end system facilitates the borrowing and returning
 - Full Authentication System (Register, Login, Logout, Fogort Password, Reset Password)
 - Pagination, Sorting & Filtering for Data
 - Roles (Admin, Librarian, and User)
-
+- Dockerized Application
 
 ## Business Features
 - Books: create, edit, delete, get available books, and show with related author & genre
