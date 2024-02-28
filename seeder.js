@@ -12,8 +12,6 @@ const Genre = require('./models/genre');
 require('dotenv').config();
 const { connectDB, sequelize } = require('./config/db');
 
-
-
 const readDataFromFile = async (filePath) => {
     try {
         const data = await fs.readFile(filePath, { encoding: 'utf8' });
@@ -48,10 +46,7 @@ const seedData = async () => {
 
 const deleteData = async () => {
     try {
-        // await sequelize.query('SET FOREIGN_KEY_CHECKS = 0', null);
         await sequelize.drop();
-        // await sequelize.query('SET FOREIGN_KEY_CHECKS = 1', null);
-
         console.log('Data destoryed successfully');
     } catch (error) {
         console.log(error);
