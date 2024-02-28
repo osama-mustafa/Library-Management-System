@@ -21,13 +21,27 @@ A library management API back-end system facilitates the borrowing and returning
 - Authors: create, edit, delete, get all authors
 - Borrowing: borrow, return, renew borrowing, manage overdue books
 
-## How to Run the Project?
+## Getting Started
+
+### Way One
 - Clone the project
 - Create your .env file from .env.example with your MySQL database credentials
 - First you need MySQL to be installed in your machine via e.g. [XAMPP](https://www.apachefriends.org/download.html)
 - Run the command `npm install` to install project dependencies
 - Run the command `npm run dev` for starting the server
 - In new terminal, run the command `node seeder -i` to seed dummy data
+
+
+### Way Two (Using Docker)
+- Clone the project 
+- Create your .env file from .env.example with the same file data
+- Run the command `docker-compose up -d` to dockerize the application
+- After dockerization process finished, In a new terminal run `docker exec -it my_app sh`
+- In the prvious openned shell terminal, run the command `node seeder -i` to seed dummy data
+- Then Run the command `exit`
+
+## Getting Deep
+After seeding the dummy data to the project 
 - Login with admin privileges
   - email: admin@example.com
   - password: admin
@@ -37,4 +51,5 @@ A library management API back-end system facilitates the borrowing and returning
 - Login with regular user
   - email: test@example.com
   - password: test
+
 
