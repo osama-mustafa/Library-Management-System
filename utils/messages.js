@@ -24,7 +24,7 @@ module.exports = {
         INCORRECT_OLD_PASSWORD: 'Old password is incorrect',
         INVALID_CREDENTIALS: 'Invalid credentials',
         INVALID_TOKEN: 'Invalid token',
-        REVOKED_TOKEN: 'Revoked token! Please login again or create a new account',
+        REVOKED_TOKEN: 'Revoked token! Please login again!',
         INVALID_IMAGE: 'The file you provided is not a valid image',
         INVALID_FILE_NAME: 'Invalid characters in file name, please rename it, or upload another file',
         INVALID_FILE_SIZE: 'File size is too large. Max 1MB allowed',

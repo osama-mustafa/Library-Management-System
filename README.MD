@@ -27,6 +27,7 @@ A library management API back-end system facilitates the borrowing and returning
 - Clone the project
 - Create your .env file from .env.example with your MySQL database credentials
 - First you need MySQL to be installed in your machine via e.g. [XAMPP](https://www.apachefriends.org/download.html)
+- Opeb MySQL & create new empty database called `library_system`
 - Run the command `npm install` to install project dependencies
 - Run the command `npm run dev` for starting the server
 - In new terminal, run the command `node seeder -i` to seed dummy data

@@ -7,7 +7,7 @@ const { handleNotAuthorized } = require("../utils/responseHandler");
 exports.register = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     let user = await User.create({ name, email, password });
-    let token = await user.generateSignedJwtToken();
+    let token = await user.generateAccessToken();
 
     res.status(200).json({
         success: true,
@@ -22,13 +22,14 @@ exports.login = asyncHandler(async (req, res) => {
     if (user) {
         const isPasswordValid = user.isPasswordsMatched(req.body.password);
         if (isPasswordValid) {
-            let token = await user.generateSignedJwtToken();
+            const accessToken = await user.generateAccessToken();
+            const refreshToken = await user.generateRefreshToken();
             await user.save()
             res.status(200).json({
                 success: true,
                 message: messages.success.USER_LOGIN,
                 data: user,
-                token
+                accessToken, refreshToken
             });
         } else {
             handleNotAuthorized(req, res, messages.error.INVALID_CREDENTIALS);
@@ -53,6 +54,13 @@ exports.getAuthenticatedUser = asyncHandler(async (req, res) => {
 });
 
 exports.logout = asyncHandler(async (req, res) => {
+    const token = req.token;
+    let user = await User.findByPk(req.user.id);
+    user.revokeAccessToken(token);
+    return res.status(200).json({
+        success: true,
+        message: messages.success.USER_LOGOUT
+    });
 
 });
 

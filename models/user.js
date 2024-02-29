@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const { DataTypes } = require('sequelize');
 const messages = require('../utils/messages');
 const roles = require('../utils/roles');
+const { generateToken } = require('../utils/authHelper');
+const RevokedAcessToken = require('./revokedAcessToken');
 
 
 const User = sequelize.define('User', {
@@ -66,21 +68,33 @@ User.beforeCreate(async (user, options) => {
 });
 
 // Generate JWT token
-User.prototype.generateSignedJwtToken = async function () {
-    try {
-        const user = {
-            id: this.id,
-            name: this.name,
-            role: this.role
-        }
-        const token = await jwt.sign(user, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRE
-        });
-        return token;
-
-    } catch (err) {
-        throw err
+User.prototype.generateAccessToken = async function () {
+    const user = {
+        id: this.id,
+        name: this.name,
+        role: this.role
     }
+    const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
+    const accessTokenExpire = process.env.ACCESS_TOKEN_EXPIRE;
+    const token = await generateToken(user, accessTokenSecret, accessTokenExpire);
+    return token;
+}
+
+// Generate Refresh Token
+User.prototype.generateRefreshToken = async function () {
+    const user = {
+        id: this.id
+    }
+    const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET;
+    const refreshTokenExpire = process.env.REFRESH_TOKEN_EXPIRE;
+    const refreshToken = await generateToken(user, refreshTokenSecret, refreshTokenExpire);
+    return refreshToken;
+}
+
+
+
+User.prototype.revokeAccessToken = async function (token) {
+    const revokedToken = await RevokedAcessToken.create({ token });
 }
 
 // Compare entered password with hashed password

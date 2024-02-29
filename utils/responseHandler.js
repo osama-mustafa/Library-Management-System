@@ -21,6 +21,13 @@ const handleNotAuthorized = (req, res, message = 'Not authorized') => {
     });
 }
 
+const handleRevokedToken = (req, res, message = 'Revoked Token') => {
+    res.status(401).json({
+        success: false,
+        message: message
+    });
+}
+
 const handleForbidden = (req, res, message = 'Forbidden!') => {
     res.status(403).json({
         success: false,
@@ -48,5 +55,6 @@ module.exports = {
     handleDuplicateRecordError,
     handleNotAuthorized,
     handleForbidden,
-    handleServerError
+    handleServerError,
+    handleRevokedToken
 }
