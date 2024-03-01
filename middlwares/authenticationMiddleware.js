@@ -1,16 +1,9 @@
 const jwt = require('jsonwebtoken');
 const messages = require('../utils/messages');
 const { handleNotAuthorized } = require('../utils/responseHandler');
-const RevokedAcessToken = require('../models/revokedAcessToken');
+const RevokedAccessToken = require('../models/revokedAccessToken');
 const { isTokenBlasklisted } = require('../utils/authHelper');
-const { handleRevokedToken } = require('../utils/responseHandler');
-
-
-const isAccessTokenRevoked = async (token) => {
-    const accessToken = await RevokedAcessToken.findOne({ token });
-    return accessToken;
-}
-
+const { handleInvalidToken } = require('../utils/responseHandler');
 
 const authenticateUser = async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -23,9 +16,9 @@ const authenticateUser = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     // Check if token is revoked 
-    const isTokenRevoked = await isTokenBlasklisted(token, RevokedAcessToken);
+    const isTokenRevoked = await isTokenBlasklisted(token, RevokedAccessToken);
     if (isTokenRevoked) {
-        handleRevokedToken(req, res, messages.error.REVOKED_TOKEN);
+        handleInvalidToken(req, res, messages.error.REVOKED_TOKEN);
         return;
     }
 

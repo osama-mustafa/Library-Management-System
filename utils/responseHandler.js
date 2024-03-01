@@ -21,7 +21,7 @@ const handleNotAuthorized = (req, res, message = 'Not authorized') => {
     });
 }
 
-const handleRevokedToken = (req, res, message = 'Revoked Token') => {
+const handleInvalidToken = (req, res, message = 'Invalid token!') => {
     res.status(401).json({
         success: false,
         message: message
@@ -56,5 +56,5 @@ module.exports = {
     handleNotAuthorized,
     handleForbidden,
     handleServerError,
-    handleRevokedToken
+    handleInvalidToken
 }

@@ -1,4 +1,5 @@
 const asyncHandler = require("../middlwares/asyncHandler");
+const RevokedRefreshToken = require("../models/revokedRefreshToken");
 const User = require('../models/user');
 const messages = require('../utils/messages');
 const { handleNotAuthorized } = require("../utils/responseHandler");
@@ -57,12 +58,22 @@ exports.logout = asyncHandler(async (req, res) => {
     const token = req.token;
     let user = await User.findByPk(req.user.id);
     user.revokeAccessToken(token);
+    user.revokeRefreshToken('sss');
+
     return res.status(200).json({
         success: true,
         message: messages.success.USER_LOGOUT
     });
 
 });
+
+exports.refreshToken = asyncHandler(async (req, res) => {
+    // console.log(req.body.refreshToken, 'refreshToken')
+    // const token = req.body.refreshToken;
+    // const revokedRefreshToken = await RevokedRefreshToken.create({ token });
+    console.log(req.user, 'req.user');
+});
+
 
 exports.forgotPassword = asyncHandler(async (req, res) => {
 

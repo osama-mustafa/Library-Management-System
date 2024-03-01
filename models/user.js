@@ -5,7 +5,8 @@ const { DataTypes } = require('sequelize');
 const messages = require('../utils/messages');
 const roles = require('../utils/roles');
 const { generateToken } = require('../utils/authHelper');
-const RevokedAcessToken = require('./revokedAcessToken');
+const RevokedAccessToken = require('./revokedAccessToken');
+const RevokedRefreshToken = require('./revokedRefreshToken');
 
 
 const User = sequelize.define('User', {
@@ -94,7 +95,11 @@ User.prototype.generateRefreshToken = async function () {
 
 
 User.prototype.revokeAccessToken = async function (token) {
-    const revokedToken = await RevokedAcessToken.create({ token });
+    const revokedToken = await RevokedAccessToken.create({ token });
+}
+
+User.prototype.revokeRefreshToken = async function (token) {
+    const revokedToken = await RevokedRefreshToken.create({ token });
 }
 
 // Compare entered password with hashed password

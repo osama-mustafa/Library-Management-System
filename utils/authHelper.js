@@ -1,6 +1,7 @@
 const crypto = require('node:crypto')
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const messages = require('./messages');
 
 const generateToken = async (payload, secretKey, expire) => {
     try {
@@ -10,6 +11,24 @@ const generateToken = async (payload, secretKey, expire) => {
         return token;
     } catch (error) {
         throw err
+    }
+}
+
+// Verify JWT Token
+const verifyToken = async (token, secret) => {
+    try {
+        const decoded = await jwt.verify(token, secret);
+        return decoded;
+    } catch (error) {
+        if (error.name === 'TokenExpiredError') {
+            return {
+                expiredToken: true
+            }
+        } else {
+            return {
+                invalidToken: true
+            }
+        }
     }
 }
 
@@ -26,6 +45,7 @@ const isTokenBlasklisted = async (token, model) => {
 module.exports = {
     generateToken,
     generateUUID,
-    isTokenBlasklisted
+    isTokenBlasklisted,
+    verifyToken
 }
 
