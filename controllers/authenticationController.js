@@ -47,7 +47,7 @@ exports.getAuthenticatedUser = asyncHandler(async (req, res) => {
         handleNotAuthorized(req, res, messages.error.NOT_AUTHORIZED);
         return;
     }
-    res.status(200).json({
+    return res.status(200).json({
         success: true,
         message: messages.success.GET_RESOURCE,
         data: user
@@ -58,7 +58,6 @@ exports.logout = asyncHandler(async (req, res) => {
     const token = req.token;
     let user = await User.findByPk(req.user.id);
     user.revokeAccessToken(token);
-    user.revokeRefreshToken('sss');
 
     return res.status(200).json({
         success: true,
