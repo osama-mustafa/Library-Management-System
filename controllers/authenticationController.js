@@ -1,8 +1,10 @@
 const asyncHandler = require("../middlwares/asyncHandler");
-const RevokedRefreshToken = require("../models/revokedRefreshToken");
 const User = require('../models/user');
 const messages = require('../utils/messages');
 const { handleNotAuthorized } = require("../utils/responseHandler");
+const { generateRandomToken, storeToken, isValidToken, setNewPassword } = require('../utils/resetPassword');
+const sendEmail = require('../utils/sendEmail');
+
 
 
 exports.register = asyncHandler(async (req, res) => {
@@ -85,6 +87,31 @@ exports.refreshToken = asyncHandler(async (req, res) => {
 
 
 exports.forgotPassword = asyncHandler(async (req, res) => {
+    let user = await User.findOne({ where: { email: req.body.email } });
+    if (!user) {
+        return res.status(400).json({
+            success: false,
+            message: messages.error.INVALID_CREDENTIALS
+        });
+    }
+    const token = await generateRandomToken();
+    await storeToken(token, user.id);
+    const resetPasswordURL = `http://${req.hostname}:${process.env.PORT}/api/v1/auth/reset-password/${token}`;
+    let htmlMessage = `
+                <h2>Hello</h2><br>
+                <h2>Follow this URL to reset password</h2><br>
+                <a href="${resetPasswordURL}">${resetPasswordURL}</a>
+    `
+    const options = {
+        sender: process.env.EMAIL_SENEDER,
+        receiver: req.body.email,
+        html: htmlMessage
+    }
+    await sendEmail(options);
+    res.status(200).json({
+        success: true,
+        message: messages.success.FORGOT_PASSWORD
+    });
 
 });
 

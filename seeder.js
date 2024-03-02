@@ -11,6 +11,7 @@ const Borrow = require('./models/borrow');
 const Genre = require('./models/genre');
 require('dotenv').config();
 const { connectDB, sequelize } = require('./config/db');
+const ResetPasswordToken = require('./models/resetPasswordToken');
 
 const readDataFromFile = async (filePath) => {
     try {
