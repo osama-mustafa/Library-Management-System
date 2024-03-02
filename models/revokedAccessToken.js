@@ -16,7 +16,6 @@ const RevokedAccessToken = sequelize.define('RevokedAccessToken', {
         defaultValue: DataTypes.NOW
     }
 }, {
-    timestamps: true,
     tableName: 'revoked_access_tokens',
 });
 

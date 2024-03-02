@@ -16,7 +16,6 @@ const RevokedRefreshToken = sequelize.define('RevokedRefreshToken', {
         defaultValue: DataTypes.NOW
     }
 }, {
-    timestamps: true,
     tableName: 'revoked_refresh_tokens',
 });
 
