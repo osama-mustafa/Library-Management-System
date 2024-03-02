@@ -68,10 +68,20 @@ exports.logout = asyncHandler(async (req, res) => {
 });
 
 exports.refreshToken = asyncHandler(async (req, res) => {
-    // console.log(req.body.refreshToken, 'refreshToken')
-    // const token = req.body.refreshToken;
-    // const revokedRefreshToken = await RevokedRefreshToken.create({ token });
-    console.log(req.user, 'req.user');
+    const user = await User.findByPk(req.user.id);
+    const oldRefreshToken = req.refreshToken;
+    const oldAccessToken = req.accessToken
+    const newAccessToken = await user.generateAccessToken();
+    const newRefreshToken = await user.generateRefreshToken();
+    await user.revokeRefreshToken(oldRefreshToken);
+    await user.revokeAccessToken(oldAccessToken)
+    res.status(200).json({
+        success: true,
+        message: messages.success.REFRESH_TOKEN,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken
+    });
+
 });
 
 

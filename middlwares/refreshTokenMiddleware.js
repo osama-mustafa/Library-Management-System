@@ -50,6 +50,8 @@ const refreshTokenMiddleware = async (req, res, next) => {
     if (accessTokenVerifyResult.expiredToken) {
         const decoded = await verifyToken(refreshToken, refreshTokenSecret);
         req.user = decoded;
+        req.refreshToken = refreshToken;
+        req.accessToken = accessToken;
         next();
     }
 }

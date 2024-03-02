@@ -92,14 +92,12 @@ User.prototype.generateRefreshToken = async function () {
     return refreshToken;
 }
 
-
-
 User.prototype.revokeAccessToken = async function (token) {
-    const revokedToken = await RevokedAccessToken.create({ token });
+    const revokedToken = await RevokedAccessToken.create({ 'token': token });
 }
 
 User.prototype.revokeRefreshToken = async function (token) {
-    const revokedToken = await RevokedRefreshToken.create({ token });
+    const revokedToken = await RevokedRefreshToken.create({ 'token': token });
 }
 
 // Compare entered password with hashed password
