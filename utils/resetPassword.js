@@ -12,9 +12,9 @@ const generateRandomToken = async (size = 32) => {
     }
 }
 
-const storeToken = async (token, userId) => {
+const storeToken = async (token, UserId) => {
     try {
-        const resetToken = await ResetPasswordToken.create({ token, userId });
+        const resetToken = await ResetPasswordToken.create({ token, UserId });
         return resetToken;
 
     } catch (err) {

@@ -16,7 +16,7 @@ const ResetPasswordToken = sequelize.define('ResetPasswordToken', {
         type: DataTypes.DATE,
         defaultValue: () => Date.now() + 10 * 60 * 1000
     },
-    userId: {
+    UserId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
