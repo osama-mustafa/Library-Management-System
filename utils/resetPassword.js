@@ -14,7 +14,10 @@ const generateRandomToken = async (size = 32) => {
 
 const storeToken = async (token, UserId) => {
     try {
-        const resetToken = await ResetPasswordToken.create({ token, UserId });
+        const resetToken = await ResetPasswordToken.create({
+            'token': token,
+            'UserId': UserId
+        });
         return resetToken;
 
     } catch (err) {
@@ -32,7 +35,7 @@ const isValidToken = async (token) => {
 const setNewPassword = async (validToken, newPassword) => {
     try {
         const token = await ResetPasswordToken.findOne({ token: validToken });
-        const user = await User.findById(token.user);
+        const user = await User.findByPk(token.UserId);
         user.password = newPassword;
         token.isUsed = true;
         await user.save();

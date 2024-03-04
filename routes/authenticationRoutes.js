@@ -18,7 +18,7 @@ router.post('/login', login);
 router.get('/me', authenticationMiddleware, getAuthenticatedUser)
 router.post('/logout', authenticationMiddleware, logout);
 router.post('/refresh-token', refreshTokenMiddleware, refreshToken);
-
+router.post('/reset-password/:token', guestMiddleware, resetPassword);
 router.post('/forgot-password', guestMiddleware, forgotPassword);
 // router.post('/reset-password/:token', resetPassword);
 // router.post('/update-password', updatePassword);

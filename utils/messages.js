@@ -27,6 +27,7 @@ module.exports = {
         INVALID_TOKEN: 'Invalid token',
         INVALID_ACCESS_TOKEN: 'Access token is invalid!',
         INVALID_REFRESH_TOKEN: 'Refresh token is invalid!',
+        INVALID_RESET_PASSWORD_TOKEN: 'Reset password token is invalid',
         REVOKED_TOKEN: 'Revoked token! Please login again!',
         EXPIRED_ACCESS_TOKEN: 'Access token is expired!',
         EXPIRED_REFRESH_TOKEN: 'Refresh token is expired!',

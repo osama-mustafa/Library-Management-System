@@ -2,7 +2,10 @@ const crypto = require('node:crypto')
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const messages = require('./messages');
+const bcrypt = require('bcryptjs');
 
+
+// Generate JWT Token
 const generateToken = async (payload, secretKey, expire) => {
     try {
         const token = await jwt.sign(payload, secretKey, {
@@ -42,10 +45,11 @@ const isTokenBlasklisted = async (token, model) => {
     return result;
 }
 
+
 module.exports = {
     generateToken,
     generateUUID,
     isTokenBlasklisted,
-    verifyToken
+    verifyToken,
 }
 

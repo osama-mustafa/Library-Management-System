@@ -11,6 +11,7 @@ const Borrow = require('./models/borrow');
 const Genre = require('./models/genre');
 require('dotenv').config();
 const { connectDB, sequelize } = require('./config/db');
+const ResetPasswordToken = require('./models/resetPasswordToken');
 
 const readDataFromFile = async (filePath) => {
     try {
@@ -32,6 +33,7 @@ const seedData = async () => {
         const genres = await readDataFromFile(genreSeederFile);
 
         await sequelize.sync({ force: true });
+        await ResetPasswordToken.sync();
         await User.bulkCreate(users, { individualHooks: true });
         await Author.bulkCreate(authors);
         await Genre.bulkCreate(genres);

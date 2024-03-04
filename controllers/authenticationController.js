@@ -116,9 +116,21 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
 });
 
 exports.resetPassword = asyncHandler(async (req, res) => {
-
+    const resetPasswordToken = req.params.token;
+    const isResetTokenValid = await isValidToken(resetPasswordToken);
+    if (isResetTokenValid) {
+        await setNewPassword(resetPasswordToken, req.body.password);
+        return res.status(200).json({
+            success: true,
+            message: messages.success.RESET_PASSWORD
+        });
+    }
+    return res.status(400).json({
+        success: false,
+        message: messages.error.INVALID_RESET_PASSWORD_TOKEN
+    });
 });
 
-exports.resetPassword = asyncHandler(async (req, res) => {
+exports.Password = asyncHandler(async (req, res) => {
 
 });
