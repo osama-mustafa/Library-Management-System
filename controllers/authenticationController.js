@@ -10,13 +10,14 @@ const sendEmail = require('../utils/sendEmail');
 exports.register = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     let user = await User.create({ name, email, password });
-    let token = await user.generateAccessToken();
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
 
     res.status(200).json({
         success: true,
         message: messages.success.USER_REGISTRED,
         data: user,
-        token
+        accessToken, refreshToken
     });
 });
 

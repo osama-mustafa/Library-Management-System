@@ -45,11 +45,20 @@ const isTokenBlasklisted = async (token, model) => {
     return result;
 }
 
+// Hash password for user model
+const hashPassword = async (user) => {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(user.password, salt);
+    console.log('aaaaaaaaaaa')
+    user.password = hashedPassword;
+}
+
 
 module.exports = {
     generateToken,
     generateUUID,
     isTokenBlasklisted,
     verifyToken,
+    hashPassword
 }
 
