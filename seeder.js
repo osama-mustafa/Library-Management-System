@@ -33,7 +33,6 @@ const seedData = async () => {
         const genres = await readDataFromFile(genreSeederFile);
 
         await sequelize.sync({ force: true });
-        await ResetPasswordToken.sync();
         await User.bulkCreate(users, { individualHooks: true });
         await Author.bulkCreate(authors);
         await Genre.bulkCreate(genres);

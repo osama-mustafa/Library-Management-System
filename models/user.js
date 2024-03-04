@@ -59,23 +59,21 @@ const User = sequelize.define('User', {
             exclude: ['createdAt', 'updatedAt']
         }
     },
-    hooks: {
-        beforeCreate: async (user, options) => {
-            await hashPassword(user);
-        },
-        beforeSave: async (user, options) => {
-            await hashPassword(user);
-        }
-    }
 });
 
-const hashPassword = async (user) => {
+User.beforeCreate(async (user, options) => {
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(user.password, salt);
+    user.password = hashedPassword;
+});
+
+User.beforeSave(async (user, options) => {
     if (user.changed('password')) {
         const salt = await bcrypt.genSalt();
         const hashedPassword = await bcrypt.hash(user.password, salt);
         user.password = hashedPassword;
     }
-};
+})
 
 // Generate JWT token
 User.prototype.generateAccessToken = async function () {

@@ -1,7 +1,7 @@
 const asyncHandler = require("../middlwares/asyncHandler");
 const User = require('../models/user');
 const messages = require('../utils/messages');
-const { handleNotAuthorized } = require("../utils/responseHandler");
+const { handleNotAuthorized, handleResourceNotFound } = require("../utils/responseHandler");
 const { generateRandomToken, storeToken, isValidToken, setNewPassword } = require('../utils/resetPassword');
 const sendEmail = require('../utils/sendEmail');
 
@@ -132,6 +132,26 @@ exports.resetPassword = asyncHandler(async (req, res) => {
     });
 });
 
-exports.Password = asyncHandler(async (req, res) => {
+exports.updatePassword = asyncHandler(async (req, res) => {
+    const user = await User.findByPk(req.user.id);
+    const { oldPassword, newPassword } = req.body;
+    if (!user) {
+        handleResourceNotFound(req, res, messages.error.RESOURCE_NOT_FOUND);
+        return;
+    }
 
+    const isPasswordConfirmed = user.isPasswordsMatched(oldPassword);
+    if (isPasswordConfirmed) {
+        user.password = newPassword;
+        await user.save();
+        return res.status(200).json({
+            success: true,
+            message: messages.success.UPDATE_PASSWORD,
+        })
+    } else {
+        return res.status(400).json({
+            success: false,
+            message: messages.error.INCORRECT_OLD_PASSWORD
+        });
+    }
 });
