@@ -38,7 +38,7 @@ A library management API back-end system facilitates the borrowing and returning
 - Create your .env file from .env.example with the same file data
 - Run the command `docker-compose up -d` to dockerize the application
 - After dockerization process finished, In a new terminal run `docker exec -it my_app sh`
-- In the prvious openned shell terminal, run the command `node seeder -i` to seed dummy data
+- In the prvious terminal, run the command `node seeder -i` to migrate tables & seed dummy data
 - Then run the command `exit` to exit from this terminal
 
 ## Getting Deep
