@@ -39,18 +39,18 @@ A library management API back-end system facilitates the borrowing and returning
 - Run the command `docker-compose up -d` to dockerize the application
 - After dockerization process finished, In a new terminal run `docker exec -it my_app sh`
 - In the prvious openned shell terminal, run the command `node seeder -i` to seed dummy data
-- Then Run the command `exit`
+- Then run the command `exit` to exit from this terminal
 
 ## Getting Deep
 After seeding the dummy data to the project 
 - Login with admin privileges
-  - email: admin@example.com
-  - password: admin
+  - email: `admin@example.com`
+  - password: `admin`
 - Login with librarian privileges
-  - email: librarian@example.com
-  - password: librarian
+  - email: `librarian@example.com`
+  - password: `librarian`
 - Login with regular user
-  - email: test@example.com
-  - password: test
+  - email: `test@example.com`
+  - password: `test`
 
 
