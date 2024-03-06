@@ -37,26 +37,41 @@ const createBookValidator = async (req, res, next) => {
 }
 
 const updateBookValidator = async (req, res, next) => {
-    await body('name')
+    await body('title')
         .optional()
         .isLength({ min: 5 })
-        .withMessage(messages.error.INVALID_NAME_LENGTH)
-        .isAlphanumeric()
-        .withMessage(messages.error.ALPHANUMERIC_NAME)
-        .run(req);
-    await body('email')
-        .optional()
-        .isEmail()
-        .withMessage(messages.error.INVALID_EMAIL)
+        .withMessage(messages.error.INVALID_BOOKS_TITLE_LENGTH)
         .escape()
         .run(req);
-    await body('role')
+    await body('availableCopies')
         .optional()
-        .isAlpha()
+        .isInt({ min: 1 })
+        .withMessage(messages.error.INVALID_AVAILABLE_COPIES)
         .run(req);
-    await body('password')
+    await body('shelfLocation')
         .optional()
+        .notEmpty()
+        .withMessage(messages.error.REQUIRED_SHELF_LOCATION)
         .run(req);
+    await body('ISBN')
+        .optional()
+        .isISBN()
+        .withMessage(messages.error.INVALID_ISBN)
+        .run(req);
+    await body('AuthorId')
+        .optional()
+        .notEmpty()
+        .withMessage(messages.error.REQUIRED_AUTHOR)
+        .isInt({ min: 1 })
+        .withMessage(messages.error.INVALID_AUTHOR)
+        .run(req)
+    await body('GenreId')
+        .optional()
+        .notEmpty()
+        .withMessage(messages.error.REQUIRED_GENRE)
+        .isInt({ min: 1 })
+        .withMessage(messages.error.INVALID_GENRE)
+        .run(req)
 
     await respondWithValidationErrors(req, res, next);
 }
