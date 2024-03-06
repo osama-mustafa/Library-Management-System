@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator');
 // Filter out 'type' and 'location' keys from each error object in express-validtor
 const filterErrors = async (errors) => {
     const filtered = await errors.map(error => {
-        const { type, location, ...rest } = error;
+        const { type, location, path, ...rest } = error;
         return rest;
     });
     return filtered;
