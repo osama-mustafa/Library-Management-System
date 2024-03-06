@@ -64,8 +64,8 @@ const User = sequelize.define('User', {
 User.beforeCreate(async (user, options) => {
     if (user.isNewRecord) {
         const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(user.getDataValue('password'), salt);
-        user.setDataValue('password', hashedPassword);
+        const hashedPassword = await bcrypt.hash(user.password, salt);
+        user.password = hashedPassword;
     }
 });
 
