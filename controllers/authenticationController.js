@@ -25,6 +25,7 @@ exports.login = asyncHandler(async (req, res) => {
     let user = await User.findOne({ where: { email: req.body.email } });
     if (user) {
         const isPasswordValid = user.isPasswordsMatched(req.body.password);
+        console.log(isPasswordValid, 'isPasswordValid')
         if (isPasswordValid) {
             const accessToken = await user.generateAccessToken();
             const refreshToken = await user.generateRefreshToken();
