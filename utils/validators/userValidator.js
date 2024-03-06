@@ -1,16 +1,17 @@
 const { body } = require('express-validator');
 const respondWithValidationErrors = require('./validatorHelper');
+const messages = require('../messages');
 
 const createUserValidator = async (req, res, next) => {
     await body('name')
-        .isLength({ min: 4 })
-        .withMessage('Name should not be less than 5 charactes')
+        .isLength({ min: 5 })
+        .withMessage(messages.error.INVALID_NAME_LENGTH)
         .isAlphanumeric()
-        .withMessage('Name should only contains letters and numbers')
+        .withMessage(messages.error.ALPHANUMERIC_NAME)
         .run(req);
     await body('email')
         .isEmail()
-        .withMessage('Please provide a valid email address')
+        .withMessage(messages.error.INVALID_EMAIL)
         .escape()
         .run(req);
     await body('role')
@@ -19,7 +20,7 @@ const createUserValidator = async (req, res, next) => {
         .run(req);
     await body('password')
         .notEmpty()
-        .withMessage('Password is required')
+        .withMessage(messages.error.REQUIRED_PASSWORD)
         .run(req);
 
     await respondWithValidationErrors(req, res, next);
