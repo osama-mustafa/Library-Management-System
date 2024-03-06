@@ -11,11 +11,12 @@ const {
 } = require('../controllers/bookController');
 const authenticationMiddleware = require('../middlwares/authenticationMiddleware');
 const librarianMiddleware = require('../middlwares/librarianMiddleware');
+const { createBookValidator } = require('../utils/validators/bookValidator');
 
 router.get('/available', getAvailableBooks);
 router.get('/search', searchBooks);
 router.get('/', getAllBooks);
-router.post('/', authenticationMiddleware, librarianMiddleware, createBook);
+router.post('/', authenticationMiddleware, librarianMiddleware, createBookValidator, createBook);
 router.get('/:id', getBook);
 router.put('/:id', authenticationMiddleware, librarianMiddleware, updateBook)
 router.delete('/:id', authenticationMiddleware, librarianMiddleware, deleteBook)

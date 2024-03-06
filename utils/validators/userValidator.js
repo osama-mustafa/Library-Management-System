@@ -26,4 +26,30 @@ const createUserValidator = async (req, res, next) => {
     await respondWithValidationErrors(req, res, next);
 }
 
-module.exports = createUserValidator
+const updateUserValidator = async (req, res, next) => {
+    await body('name')
+        .optional()
+        .isLength({ min: 5 })
+        .withMessage(messages.error.INVALID_NAME_LENGTH)
+        .isAlphanumeric()
+        .withMessage(messages.error.ALPHANUMERIC_NAME)
+        .run(req);
+    await body('email')
+        .optional()
+        .isEmail()
+        .withMessage(messages.error.INVALID_EMAIL)
+        .escape()
+        .run(req);
+    await body('role')
+        .optional()
+        .isAlpha()
+        .run(req);
+    await body('password')
+        .optional()
+        .run(req);
+
+    await respondWithValidationErrors(req, res, next);
+}
+
+
+module.exports = { createUserValidator, updateUserValidator }
