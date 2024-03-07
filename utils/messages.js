@@ -49,6 +49,8 @@ module.exports = {
         INVALID_ISBN: 'ISBN is invalid',
         INVALID_AVAILABLE_COPIES: 'Available copies is invalid',
         REQUIRED_SHELF_LOCATION: 'Shelf location is required',
+        REQUIRED_NATIONALITY: 'Nationality is required',
+        REQUIRED_BIOGRAPHY: 'Biography is required',
         INVALID_BOOKS_TITLE_LENGTH: 'Title must be between 5 and 200 characters',
         BORROWED_BOOK_BY_USER: 'This book already borrowed by this user',
         EXCEED_BORROW_LIMIT: 'You have reached the maximum borrowing limit for books',
