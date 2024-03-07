@@ -42,7 +42,8 @@ A library management API back-end system facilitates the borrowing and returning
 - Then run the command `exit` to exit from this terminal
 
 ## Getting Deep
-After seeding the dummy data to the project 
+- Check API documentation via http://localhost:3000/api-docs/
+- After seeding the dummy data to the project 
 - Login with admin privileges
   - email: `admin@example.com`
   - password: `admin`

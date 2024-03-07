@@ -1,0 +1,995 @@
+openapi: 3.0.0
+info:
+  title: Library Management System
+  description: >-
+    # 🚀 Get started here
+
+
+    A library management API back-end system facilitates the borrowing and
+    returning of books by users. Users typically create accounts within the
+    system, allowing them to search for available books, request to borrow them,
+    and return them when finished. Administrators have additional privileges,
+    such as managing the books, authors, and overseeing borrowing
+    activities.EndFragment
+  version: 1.0.0
+servers:
+  - url: http://{{localhost:3000}}
+components:
+  securitySchemes:
+    noauthAuth:
+      type: http
+      scheme: noauth
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Authentication
+    description: Authentication Functionality in RESTful API Express JS App
+  - name: Users
+    description: CRUD operations for users
+  - name: Authors
+    description: CRUD operations for authors
+  - name: Genres
+    description: CRUD operations for genres
+  - name: Books
+    description: CRUD operations for books
+  - name: Borrowing
+    description: >-
+      All operations regarding to borrowing e.g. borrow book, get overdue books,
+      return book etc.
+  - name: Profile
+    description: Authenticated User Profile
+paths:
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Authentication
+      summary: Register
+      description: Register new account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: user1
+                email: user1@gmail.com
+                password: '123456'
+      security:
+        - noauthAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: Login
+      description: Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: admin@example.com
+                password: admin
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/me:
+    get:
+      tags:
+        - Authentication
+      summary: Get Authenticated User
+      description: Get authenticated user details
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/logout:
+    post:
+      tags:
+        - Authentication
+      summary: Logout
+      description: Logout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/refresh-token:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh Token
+      description: Get new access token and refresh token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                refreshToken: >-
+                  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzA5MzgzMjczLCJleHAiOjE3MTE5NzUyNzN9.I8y7JiZiY1AoqHyqvbS-_9QBMqBuVb1-bAKTk6NIq0M
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/forgot-password:
+    post:
+      tags:
+        - Authentication
+      summary: Forgot Password
+      description: Forget password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: admin@example.com
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/reset-password/642cc0bb9776ed60a645528f7cfc9f01ca11175470ba4639a516f4c88318b75c:
+    post:
+      tags:
+        - Authentication
+      summary: Reset Password
+      description: Reset password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                password: '123456789'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/auth/update-password:
+    post:
+      tags:
+        - Authentication
+      summary: Update Password
+      description: Update current password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                oldPassword: admin
+                newPassword: '123456'
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/users:
+    post:
+      tags:
+        - Users
+      summary: Create User
+      description: "Create user\n\n@desc \_ \_Create user\n\n@route \_ POST /api/v1/users\n\n@access \_Private/Admin"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: yar
+                email: yara@gmail.com
+                password: '123456'
+                role: test
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Users
+      summary: Get All Users
+      description: "Get all users\n\n- @desc \_ \_Get all users\n    \n- @route \_ GET /api/v1/users\n    \n- @access \_Private/Admin"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: select
+          in: query
+          schema:
+            type: string
+          example: name,email
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/users/1:
+    get:
+      tags:
+        - Users
+      summary: Get User
+      description: "Get user details\n\n@desc \_ \_Get user\n\n@route \_ GET /api/v1/users/:id\n\n@access \_Private/Admin"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Users
+      summary: Update User
+      description: "Update user\n\n- @desc \_ \_Update user\n    \n- @route \_ PUT /api/v1/users/:id\n    \n- @access \_Private/Admin"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: admin123
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/users/444:
+    delete:
+      tags:
+        - Users
+      summary: Delete User
+      description: "Delete user\n\n- @desc \_ \_Delete user\n    \n- @route \_ DELETE /api/v1/users/:id\n    \n- @access \_Private/Admin"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/authors:
+    post:
+      tags:
+        - Authors
+      summary: Create Author
+      description: "Create author\n\n@desc \_ \_Create author\n\n@route \_ POST /api/v1/authors\n\n@access \_Private/(Admin || Librarian)"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: author1
+                nationality: Egyptian<script>alert(1)</script>
+                biography: I am an author
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Authors
+      summary: Get All Authors
+      description: "Get all authors\n\n@desc \_ \_Get all authors\n\n@route \_ GET /api/v1/authors\n\n@access \_Public"
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: orderBy
+          in: query
+          schema:
+            type: string
+          example: name
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/authors/1:
+    get:
+      tags:
+        - Authors
+      summary: Get Author
+      description: |-
+        Get author information
+
+        - @desc Get author
+            
+        - @route GET /api/v1/authors/:id
+            
+        - @access Public
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Authors
+      summary: Update Author
+      description: |-
+        Update author information
+
+        - @desc Update author
+            
+        - @route PUT /api/v1/authors/:id
+            
+        - @access Private/(Admin || Librarian)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: author test updated
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/authors/11:
+    delete:
+      tags:
+        - Authors
+      summary: Delete Author
+      description: |-
+        Delete author with its associated books
+
+        - @desc Delete author
+        - @route DELETE /api/v1/authors/:id
+        - @access Private/(Admin || Librarian)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/genres:
+    post:
+      tags:
+        - Genres
+      summary: Create Genre
+      description: |-
+        Create author
+
+        @desc Create genre
+
+        @route POST /api/v1/genres
+
+        @access Private/(Admin || Librarian)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: genre1
+                description: genre test desc1
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Genres
+      summary: Get All Genres
+      description: |-
+        Get all genres
+
+        @desc Get all genres
+
+        @route GET /api/v1/genres
+
+        @access Public
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: page
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: select
+          in: query
+          schema:
+            type: string
+          example: name,description
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/genres/10:
+    get:
+      tags:
+        - Genres
+      summary: Get Genre
+      description: |-
+        Get author information
+
+        - @desc Get genre
+            
+        - @route GET /api/v1/genres/:id
+            
+        - @access Public
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/genres/1:
+    put:
+      tags:
+        - Genres
+      summary: Update Genre
+      description: |-
+        Update author information
+
+        - @desc Update genre
+            
+        - @route PUT /api/v1/genres/:id
+            
+        - @access Private/(Admin || Librarian)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: test genre
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/genres/12:
+    delete:
+      tags:
+        - Genres
+      summary: Delete Genre
+      description: |-
+        Delete author with its associated books
+
+        - @desc Delete genre
+            
+        - @route DELETE /api/v1/genres/:id
+            
+        - @access Private/(Admin || Librarian)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/books:
+    post:
+      tags:
+        - Books
+      summary: Create Book
+      description: "Create book\n\n- @desc \_ \_Create book\n    \n- @route \_ POST /api/v1/books\n    \n- @access \_Private/(Admin || Librarian)"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: New Book 4
+                availableCopies: 5
+                shelfLocation: RCE/512
+                ISBN: 978-92-95054-03-5
+                AuthorId: 1
+                GenreId: 10
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Books
+      summary: Get All Books
+      description: "Get all books\n\n- @desc \_ \_Get all books\n    \n- @route \_ GET /api/v1/books\n    \n- @access \_Public"
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/books/available:
+    get:
+      tags:
+        - Books
+      summary: Get Available Books
+      description: |-
+        Get available books which have enough copies
+
+        - @desc Get available books
+            
+        - @route GET /api/v1/books/available
+            
+        - @access PublicEndFragment
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/books/14:
+    get:
+      tags:
+        - Books
+      summary: Get Book
+      description: "Get book details with users who borrowed this book\n\n@desc \_ \_Get book\n\n@route \_ GET /api/v1/books/:id\n\n@access \_Private/(Admin || Librarian)"
+      security:
+        - noauthAuth: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - Books
+      summary: Update Book
+      description: "Update book details\n\n@desc \_ \_Update book\n\n@route \_ PUT /api/v1/books/:id\n\n@access \_Private/(Admin || Librarian)"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                availableCopies: 60
+                AuthorId: 4
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/books/search:
+    get:
+      tags:
+        - Books
+      summary: Search Books
+      description: "Search book\n\n@desc \_ \_Search books\n\n@route \_ GET /api/v1/books/search?searchTerm=mySearchTerm\n\n@access \_Public"
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: searchTerm
+          in: query
+          schema:
+            type: string
+          example: great
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/books/12:
+    delete:
+      tags:
+        - Books
+      summary: Delete Book
+      description: "Delete book\n\n@desc \_ \_Delete book\n\n@route \_ DELETE /api/v1/books/:id\n\n@access \_Private/(Admin || Librarian)"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/borrow/10/1:
+    post:
+      tags:
+        - Borrowing
+      summary: Borrow Book
+      description: |-
+        Borrow book
+
+        - @desc Borrow book
+        - @route POST /api/v1/borrow/:bookId/:userId
+        - @access Private/User
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/borrow/return-book/1:
+    post:
+      tags:
+        - Borrowing
+      summary: Return Book
+      description: >-
+        Return the book to the library with permission limited to (admin,
+        librarian or the user who borrowed this book)
+
+
+        - @desc Return book
+            
+        - @route GET /api/v1/borrow/return-books/:borrowId
+            
+        - @access Private/(Admin || Librarian || User who borrowed the book)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/borrow/:
+    get:
+      tags:
+        - Borrowing
+      summary: Get All Borrowers
+      description: |-
+        Get all borrowers
+
+        - @desc Get all borrowers
+        - @route GET /api/v1/borrow/borrowers
+        - @access Private/Admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/borrow/overdue-books:
+    get:
+      tags:
+        - Borrowing
+      summary: Get All Overdue Books
+      description: |-
+        Get all overdue books that exceeded due date
+
+        - @desc Get all books that exceed due date
+        - @route GET /api/v1/borrow/overdue-books
+        - @access Private/Admin
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/borrow/1:
+    put:
+      tags:
+        - Borrowing
+      summary: Update Borrow Process
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                renewCount: 3
+                renewed: true
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/borrow/10:
+    delete:
+      tags:
+        - Borrowing
+      summary: Delete Borrow Process
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/profile/borrowed-books:
+    get:
+      tags:
+        - Profile
+      summary: Get Borrowed Books
+      description: "Get borrowed books for authenticated user in his profile\n\n- @desc \_ \_Get borrowed books in user profile\n    \n- @route \_ GET /api/v1/profile/borrowed-books\n    \n- @access \_Private/User"
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
