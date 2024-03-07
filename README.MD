@@ -1,11 +1,11 @@
-## About
+## 🗹 About
 A library management API back-end system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the books, authors, and overseeing borrowing activities.
 
 ## 🗹 Technologies
 - Node.js (Express)
 - MySQL (Sequelize)
 
-## Tech Features
+## 🗹 Tech Features
 - API Documentation
 - API Rate Limiting
 - RESTful Routing
@@ -18,13 +18,13 @@ A library management API back-end system facilitates the borrowing and returning
 - Roles (Admin, Librarian, and User)
 - Dockerized Application
 
-## Business Features
+## 🗹 Business Features
 - Books: create, edit, delete, get available books, and show with related author & genre
 - Genres: create, edit, delete, get all genres
 - Authors: create, edit, delete, get all authors
 - Borrowing: borrow, return, renew borrowing, manage overdue books
 
-## Getting Started
+## 🗹 Getting Started
 
 ### Way One
 - Clone the project
@@ -44,7 +44,7 @@ A library management API back-end system facilitates the borrowing and returning
 - In the prvious terminal, run the command `node seeder -i` to migrate tables & seed dummy data
 - Then run the command `exit` to exit from this terminal
 
-## Getting Deep
+## 🗹 Getting Deep
 - Check API documentation via http://localhost:3000/api-docs/
 - After seeding the dummy data to the project 
 - Login with admin privileges
