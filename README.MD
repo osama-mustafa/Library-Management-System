@@ -30,7 +30,7 @@ A library management API back-end system facilitates the borrowing and returning
 - Opeb MySQL & create new empty database called `library_system`
 - Run the command `npm install` to install project dependencies
 - Run the command `npm run dev` for starting the server
-- In new terminal, run the command `node seeder -i` to seed dummy data
+- In new terminal, run the command `node seeder -i` to migrate tables & seed dummy data
 
 
 ### Way Two (Using Docker)
