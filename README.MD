@@ -1,6 +1,9 @@
 ## About
-
 A library management API back-end system facilitates the borrowing and returning of books by users. Users typically create accounts within the system, allowing them to search for available books, request to borrow them, and return them when finished. Administrators have additional privileges, such as managing the books, authors, and overseeing borrowing activities.
+
+## 🗹 Technologies
+- Node.js (Express)
+- MySQL (Sequelize)
 
 ## Tech Features
 - API Documentation
@@ -10,7 +13,7 @@ A library management API back-end system facilitates the borrowing and returning
 - Error Handling
 - Proper Status Codes
 - Response Formatting
-- Full Authentication System (Register, Login, Logout, Fogort Password, Reset Password)
+- Full Authentication System (Register, Login, Logout, Forgot & Reset Password)
 - Pagination, Sorting & Filtering for Data
 - Roles (Admin, Librarian, and User)
 - Dockerized Application
