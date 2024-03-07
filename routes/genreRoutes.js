@@ -9,11 +9,12 @@ const {
 } = require('../controllers/genreController');
 const authenticationMiddleware = require('../middlwares/authenticationMiddleware');
 const librarianMiddleware = require('../middlwares/librarianMiddleware');
+const { createGenreValidator, updateGenreValidator } = require('../utils/validators/genreValidator');
 
-router.post('/', authenticationMiddleware, librarianMiddleware, createGenre);
+router.post('/', authenticationMiddleware, librarianMiddleware, createGenreValidator, createGenre);
 router.get('/', getAllGenres);
 router.get('/:id', getGenre);
-router.put('/:id', authenticationMiddleware, librarianMiddleware, updateGenre);
+router.put('/:id', authenticationMiddleware, librarianMiddleware, updateGenreValidator, updateGenre);
 router.delete('/:id', authenticationMiddleware, librarianMiddleware, deleteGenre);
 
 module.exports = router;
