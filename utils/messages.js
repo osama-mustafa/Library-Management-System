@@ -52,6 +52,8 @@ module.exports = {
         REQUIRED_NATIONALITY: 'Nationality is required',
         REQUIRED_BIOGRAPHY: 'Biography is required',
         REQUIRED_DESCRIPTION: 'Description is required',
+        REQUIRED_EMAIL: 'Email is required',
+        REQUIRED_NAME: 'Name is required',
         INVALID_BOOKS_TITLE_LENGTH: 'Title must be between 5 and 200 characters',
         BORROWED_BOOK_BY_USER: 'This book already borrowed by this user',
         EXCEED_BORROW_LIMIT: 'You have reached the maximum borrowing limit for books',

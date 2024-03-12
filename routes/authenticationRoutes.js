@@ -12,8 +12,9 @@ const {
 const authenticationMiddleware = require('../middlwares/authenticationMiddleware');
 const refreshTokenMiddleware = require('../middlwares/refreshTokenMiddleware');
 const guestMiddleware = require('../middlwares/guestMiddleware');
+const registerValidator = require('../utils/validators/authenticationValidator');
 
-router.post('/register', guestMiddleware, register);
+router.post('/register', guestMiddleware, registerValidator, register);
 router.post('/login', guestMiddleware, login);
 router.get('/me', authenticationMiddleware, getAuthenticatedUser)
 router.post('/logout', authenticationMiddleware, logout);

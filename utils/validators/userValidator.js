@@ -38,7 +38,6 @@ const updateUserValidator = async (req, res, next) => {
         .optional()
         .isEmail()
         .withMessage(messages.error.INVALID_EMAIL)
-        .escape()
         .run(req);
     await body('role')
         .optional()
