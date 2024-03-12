@@ -24,4 +24,23 @@ const registerValidator = async (req, res, next) => {
     await respondWithValidationErrors(req, res, next);
 }
 
-module.exports = registerValidator
+const loginValidator = async (req, res, next) => {
+    await body('email')
+        .notEmpty()
+        .withMessage(messages.error.REQUIRED_EMAIL)
+        .isEmail()
+        .withMessage(messages.error.INVALID_EMAIL)
+        .run(req);
+    await body('password')
+        .notEmpty()
+        .withMessage(messages.error.REQUIRED_PASSWORD)
+        .run(req);
+
+    await respondWithValidationErrors(req, res, next);
+}
+
+
+module.exports = {
+    registerValidator,
+    loginValidator
+}
