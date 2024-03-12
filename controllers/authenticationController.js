@@ -27,9 +27,11 @@ exports.login = asyncHandler(async (req, res) => {
     if (user) {
         const isPasswordValid = user.isPasswordsMatched(req.body.password);
         if (isPasswordValid) {
+
+            // Generate tokens
             const accessToken = await user.generateAccessToken();
             const refreshToken = await user.generateRefreshToken();
-            await user.save()
+
             res.status(200).json({
                 success: true,
                 message: messages.success.USER_LOGIN,
@@ -62,31 +64,32 @@ exports.logout = asyncHandler(async (req, res) => {
     const token = req.token;
     let user = await User.findByPk(req.user.id);
     user.revokeAccessToken(token);
-
     return res.status(200).json({
         success: true,
         message: messages.success.USER_LOGOUT
     });
-
 });
 
 exports.refreshToken = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.user.id);
     const oldRefreshToken = req.refreshToken;
-    const oldAccessToken = req.accessToken
+    const oldAccessToken = req.accessToken;
+
+    // Generate new tokens
     const newAccessToken = await user.generateAccessToken();
     const newRefreshToken = await user.generateRefreshToken();
+
+    // Revoke old tokens
     await user.revokeRefreshToken(oldRefreshToken);
-    await user.revokeAccessToken(oldAccessToken)
+    await user.revokeAccessToken(oldAccessToken);
+
     res.status(200).json({
         success: true,
         message: messages.success.REFRESH_TOKEN,
         accessToken: newAccessToken,
         refreshToken: newRefreshToken
     });
-
 });
-
 
 exports.forgotPassword = asyncHandler(async (req, res) => {
     let user = await User.findOne({ where: { email: req.body.email } });
@@ -114,7 +117,6 @@ exports.forgotPassword = asyncHandler(async (req, res) => {
         success: true,
         message: messages.success.FORGOT_PASSWORD
     });
-
 });
 
 exports.resetPassword = asyncHandler(async (req, res) => {
