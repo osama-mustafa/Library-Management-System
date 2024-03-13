@@ -17,7 +17,7 @@ const YAML = require('yaml');
 connectDB();
 
 // Parse application/json
-app.use(express.json());
+app.use(express.json({ limit: '20kb' }));
 
 // Enable rate limiting
 app.use(rateLimitMiddleware);
