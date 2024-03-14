@@ -8,8 +8,9 @@ const mountRoutes = require('./routes/index');
 const rateLimitMiddleware = require('./middlwares/rateLimitMiddleware');
 const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
-const fs = require("fs");
+const fs = require('fs');
 const YAML = require('yaml');
+const hpp = require('hpp');
 
 
 
@@ -23,7 +24,10 @@ app.use(express.json({ limit: '20kb' }));
 app.use(rateLimitMiddleware);
 
 // Use Helmet middleware for security
-app.use(helmet())
+app.use(helmet());
+
+// Middleware to Protect against HTTP Parameter Pollution Attacks
+app.use(hpp());
 
 // Load Routes
 mountRoutes(app);
