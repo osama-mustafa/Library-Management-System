@@ -11,8 +11,7 @@ const swaggerUi = require('swagger-ui-express');
 const fs = require('fs');
 const YAML = require('yaml');
 const hpp = require('hpp');
-
-
+const notFoundHandler = require('./middlwares/notFoundHandler');
 
 // Connect to MySQL DB
 connectDB();
@@ -37,6 +36,9 @@ const swaggerFile = fs.readFileSync('./swagger.yaml', 'utf8')
 const swaggerDocument = YAML.parse(swaggerFile)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+
+// Handle Not Found Routes
+app.use(notFoundHandler);
 
 app.listen(port, () => {
     console.log(`Library Management System listening on ${port} port in ${environment} environment`)

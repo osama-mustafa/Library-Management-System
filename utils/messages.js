@@ -22,6 +22,7 @@ module.exports = {
         NOT_AUTHORIZED: 'Your are not authorized to access this route!',
         FORBIDDEN: 'You don\'t have permissions to access this route!',
         SERVER_ERROR: 'Internal server error',
+        PAGE_NOT_FOUND: 'Page is not found!',
         INCORRECT_OLD_PASSWORD: 'Old password is incorrect',
         REQUIRED_PASSWORD: 'Password is required',
         INVALID_CREDENTIALS: 'Invalid credentials',
