@@ -2,8 +2,7 @@ const messages = require("../utils/messages");
 const { handleNotAuthorized } = require("../utils/responseHandler");
 
 const guestMiddleware = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (authHeader) {
+    if (req.headers?.authorization) {
         handleNotAuthorized(req, res, messages.error.NOT_AUTHORIZED);
         return;
     }
